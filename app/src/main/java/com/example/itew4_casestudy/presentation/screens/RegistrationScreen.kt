@@ -79,4 +79,35 @@ fun RegistrationScreen(navController: NavController) {
         }
 
     }
+
+    TextFieldLayout(
+        layoutLabel = "Input Username",
+        innerComposable = {
+            TextFieldTemplate(
+                value = userName,
+                valueUpdate = {
+                    userName = it
+                },
+                textFieldLabel = "Username",
+                icon = Icons.Filled.Person
+            )
+        }
+    )
+
+    TextFieldLayout(
+        layoutLabel = "Input Full Name",
+        innerComposable = {
+            TextFieldTemplate(
+                value = name,
+                valueUpdate = {
+                    name = it
+                },
+                textFieldLabel = "Full Name",
+                icon = Icons.Filled.Person
+            )
+        }
+    )
+
+
 }
+
