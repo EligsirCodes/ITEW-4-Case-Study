@@ -81,7 +81,17 @@ fun LoginScreen(navController: NavController) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                EmboldenedTextTemplate(
+                    text = "Welcome to PNC Buddy",
+                    modifier = Modifier
+                        .padding(top = 20.dp, bottom = 5.dp)
+                )
 
+                NormalTextTemplate(
+                    text = "Log in to your account",
+                    modifier = Modifier
+                        .padding(top = 5.dp, bottom = 20.dp)
+                )
             }
         }
     }
