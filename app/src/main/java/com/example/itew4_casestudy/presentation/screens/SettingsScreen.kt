@@ -44,5 +44,100 @@ fun SettingsScreen(navController: NavController) {
                 }
             )
         }
-    )
+    ){
+        Scaffold(
+            modifier = Modifier
+                .fillMaxSize(),
+            topBar = {
+                TopBarLayout(
+                    onClick = {
+                        scope.launch {
+                            drawerState.open()
+                        }
+                    }
+                )
+            },
+            bottomBar = { BottomBarLayout( navController = navController, selectionIdentifier = 5) }
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            modifier = Modifier
+                                .padding(start = 20.dp, end = 10.dp, top = 20.dp, bottom = 10.dp)
+                                .size(50.dp),
+                            imageVector = Icons.Filled.Settings,
+                            contentDescription = "Settings Icon",
+                            tint = Color(red = 13, green = 61, blue = 3)
+                        )
+
+                        EmboldenedTextTemplate(
+                            modifier = Modifier
+                                .padding(top = 20.dp, bottom = 10.dp),
+                            text = "Settings",
+                            textAlign = TextAlign.Center,
+                            fontSize = 30.sp
+                        )
+                    }
+
+                    HorizontalDivider(
+                        modifier = Modifier
+                            .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 10.dp),
+                        thickness = 5.dp,
+                        color = Color(red = 13, green = 61, blue = 3)
+                    )
+
+                    CardTemplate(
+                        modifier = Modifier
+                            .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color(red = 179, green = 204, blue = 175)
+                        ),
+                        innerComposable = {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                EmboldenedTextTemplate(
+                                    modifier = Modifier
+                                        .padding(20.dp),
+                                    text = "Dark Mode"
+                                )
+
+                                Switch(
+                                    modifier = Modifier
+                                        .padding(end = 20.dp),
+                                    checked = isDarkMode,
+                                    onCheckedChange = { isDarkMode = it },
+                                    colors = SwitchDefaults.colors(
+                                        checkedThumbColor = Color.White,
+                                        checkedTrackColor = Color(red = 13, green = 61, blue = 3),
+                                        uncheckedThumbColor = Color(red = 13, green = 61, blue = 3),
+                                        uncheckedTrackColor = Color.White,
+                                        checkedBorderColor = Color.White,
+                                        uncheckedBorderColor = Color(red = 13, green = 61, blue = 3)
+                                    )
+                                )
+                            }
+                        }
+                    )
+
 }
