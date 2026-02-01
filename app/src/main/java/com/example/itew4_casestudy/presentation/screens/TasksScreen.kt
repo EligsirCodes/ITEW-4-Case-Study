@@ -15,5 +15,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun TaskScreen(navController: NavController) {
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
 
 }
