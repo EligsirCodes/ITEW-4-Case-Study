@@ -40,5 +40,64 @@ fun TaskScreen(navController: NavController) {
                 }
             )
         }
-    )
-}
+    ){
+        Scaffold(
+            modifier = Modifier
+                .fillMaxSize(),
+            topBar = {
+                TopBarLayout(
+                    onClick = {
+                        scope.launch {
+                            drawerState.open()
+                        }
+                    }
+                )
+            },
+            bottomBar = { BottomBarLayout( navController = navController, selectionIdentifier = 4) }
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            modifier = Modifier
+                                .padding(start = 20.dp, end = 10.dp, top = 20.dp, bottom = 10.dp)
+                                .size(50.dp),
+                            imageVector = Icons.Filled.Task,
+                            contentDescription = "Task Icon",
+                            tint = Color(red = 13, green = 61, blue = 3)
+                        )
+
+                        EmboldenedTextTemplate(
+                            modifier = Modifier
+                                .padding(top = 20.dp, bottom = 10.dp),
+                            text = "Tasks",
+                            textAlign = TextAlign.Center,
+                            fontSize = 30.sp
+                        )
+                    }
+
+                    HorizontalDivider(
+                        modifier = Modifier
+                            .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 10.dp),
+                        thickness = 5.dp,
+                        color = Color(red = 13, green = 61, blue = 3)
+                    )
+
+
+                }
