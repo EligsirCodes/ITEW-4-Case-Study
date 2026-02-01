@@ -242,6 +242,6 @@ fun DashboardScreen(navController: NavController) {
                     )
                 }
             }
+            }
         }
     }
-}
