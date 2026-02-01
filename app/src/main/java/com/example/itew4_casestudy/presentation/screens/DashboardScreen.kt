@@ -195,7 +195,53 @@ fun DashboardScreen(navController: NavController) {
                     )
                 }
 
+                Row(
+                    modifier = Modifier
+                        .padding(top = 10.dp, bottom = 10.dp)
+                        .fillMaxWidth()
+                        .height(150.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    CardTemplate(
+                        modifier = Modifier
+                            .weight(.4f)
+                            .fillMaxHeight()
+                            .padding(start = 10.dp, end = 10.dp),
+                        onClick = {
+                            navController.navigate(Routes.SETTINGS_SCREEN)
+                        },
+                        innerComposable = {
+                            OptionLayout(
+                                modifier = Modifier
+                                    .fillMaxSize(.5f)
+                                    .padding(bottom = 10.dp),
+                                imageVector = Icons.Filled.Settings,
+                                optionText = "Settings"
+                            )
+                        }
+                    )
 
+                    CardTemplate(
+                        modifier = Modifier
+                            .weight(.5f)
+                            .fillMaxHeight()
+                            .padding(start = 10.dp, end = 10.dp),
+                        onClick = {
+                            navController.navigate(Routes.TASK_SCREEN)
+                        },
+                        innerComposable = {
+                            OptionLayout(
+                                modifier = Modifier
+                                    .fillMaxSize(.5f)
+                                    .padding(bottom = 10.dp),
+                                imageVector = Icons.Filled.Task,
+                                optionText = "Tasks"
+                            )
+                        }
+                    )
+                }
+            }
             }
         }
     }
