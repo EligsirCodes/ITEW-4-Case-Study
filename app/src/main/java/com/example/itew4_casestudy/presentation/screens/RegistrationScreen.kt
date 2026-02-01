@@ -39,4 +39,28 @@ fun RegistrationScreen(navController: NavController) {
                 .fillMaxWidth(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
-        ) {}
+        ) {
+            CircleLayout(
+                modifier = Modifier
+                    .padding(bottom = 10.dp)
+                    .size(100.dp)
+                    .shadow(
+                        elevation = 10.dp,
+                        shape = CircleShape,
+                        clip = false
+                    )
+                    .border(
+                        width = 5.dp,
+                        color = Color(red = 13, green = 61, blue = 3),
+                        shape = CircleShape
+                    )
+                    .clip(CircleShape),
+                innerComposable = {
+                    Image(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        painter = painterResource(R.drawable.pnclogo),
+                        contentDescription = "PNC Logo"
+                    )
+                }
+            )
