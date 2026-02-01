@@ -34,110 +34,128 @@ fun RegistrationScreen(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        CircleLayout(
-            modifier = Modifier
-                .padding(bottom = 10.dp)
-                .size(100.dp)
-                .shadow(
-                    elevation = 10.dp,
-                    shape = CircleShape,
-                    clip = false
-                )
-                .border(
-                    width = 5.dp,
-                    color = Color(red = 13, green = 61, blue = 3),
-                    shape = CircleShape
-                )
-                .clip(CircleShape),
-            innerComposable = {
-                Image(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    painter = painterResource(R.drawable.pnclogo),
-                    contentDescription = "PNC Logo"
-                )
-            }
-        )
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .background(Color(red = 179, green = 204, blue = 175)),
+                .fillMaxWidth(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            EmboldenedTextTemplate(
-                text = "Welcome to PNC Buddy",
+            CircleLayout(
                 modifier = Modifier
-                    .padding(top = 20.dp, bottom = 5.dp)
+                    .padding(bottom = 10.dp)
+                    .size(100.dp)
+                    .shadow(
+                        elevation = 10.dp,
+                        shape = CircleShape,
+                        clip = false
+                    )
+                    .border(
+                        width = 5.dp,
+                        color = Color(red = 13, green = 61, blue = 3),
+                        shape = CircleShape
+                    )
+                    .clip(CircleShape),
+                innerComposable = {
+                    Image(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        painter = painterResource(R.drawable.pnclogo),
+                        contentDescription = "PNC Logo"
+                    )
+                }
             )
 
-            NormalTextTemplate(
-                text = "Sign up now",
+            Column(
                 modifier = Modifier
-                    .padding(top = 5.dp, bottom = 20.dp)
-            )
+                    .fillMaxWidth()
+                    .background(Color(red = 179, green = 204, blue = 175)),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                EmboldenedTextTemplate(
+                    text = "Welcome to PNC Buddy",
+                    modifier = Modifier
+                        .padding(top = 20.dp, bottom = 5.dp)
+                )
+
+                NormalTextTemplate(
+                    text = "Sign up now",
+                    modifier = Modifier
+                        .padding(top = 5.dp, bottom = 20.dp)
+                )
+            }
         }
 
+        TextFieldLayout(
+            layoutLabel = "Input Username",
+            innerComposable = {
+                TextFieldTemplate(
+                    value = userName,
+                    valueUpdate = {
+                        userName = it
+                    },
+                    textFieldLabel = "Username",
+                    icon = Icons.Filled.Person
+                )
+            }
+        )
+
+        TextFieldLayout(
+            layoutLabel = "Input Full Name",
+            innerComposable = {
+                TextFieldTemplate(
+                    value = name,
+                    valueUpdate = {
+                        name = it
+                    },
+                    textFieldLabel = "Full Name",
+                    icon = Icons.Filled.Person
+                )
+            }
+        )
+
+        TextFieldLayout(
+            layoutLabel = "Input Password",
+            innerComposable = {
+                PasswordTextFieldTemplate(
+                    value = password,
+                    valueUpdate = {
+                        password = it
+                    },
+                    textFieldLabel = "Password",
+                    leadingIcon = Icons.Filled.Lock
+                )
+            }
+        )
+
+        TextFieldLayout(
+            layoutLabel = "Confirm Password",
+            innerComposable = {
+                PasswordTextFieldTemplate(
+                    value = confirmPassword,
+                    valueUpdate = {
+                        confirmPassword = it
+                    },
+                    textFieldLabel = "Confirm Password",
+                    leadingIcon = Icons.Filled.Lock
+                )
+            }
+        )
+
+        ButtonTemplate(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
+            onClick = { },
+            buttonText = "Register"
+        )
+
+        LogInOrSignUpLayout(
+            initialText = "Already have an account? ",
+            underlinedText = "Log in here",
+            onClick = {
+                navController.navigate(Routes.LOGIN_SCREEN)
+            }
+        )
     }
-
-    TextFieldLayout(
-        layoutLabel = "Input Username",
-        innerComposable = {
-            TextFieldTemplate(
-                value = userName,
-                valueUpdate = {
-                    userName = it
-                },
-                textFieldLabel = "Username",
-                icon = Icons.Filled.Person
-            )
-        }
-    )
-
-    TextFieldLayout(
-        layoutLabel = "Input Full Name",
-        innerComposable = {
-            TextFieldTemplate(
-                value = name,
-                valueUpdate = {
-                    name = it
-                },
-                textFieldLabel = "Full Name",
-                icon = Icons.Filled.Person
-            )
-        }
-    )
-    TextFieldLayout(
-        layoutLabel = "Confirm Password",
-        innerComposable = {
-            PasswordTextFieldTemplate(
-                value = confirmPassword,
-                valueUpdate = {
-                    confirmPassword = it
-                },
-                textFieldLabel = "Confirm Password",
-                leadingIcon = Icons.Filled.Lock
-            )
-        }
-    )
-
-    ButtonTemplate(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
-        onClick = { },
-        buttonText = "Register"
-    )
-
-    LogInOrSignUpLayout(
-        initialText = "Already have an account? ",
-        underlinedText = "Log in here",
-        onClick = {
-            navController.navigate(Routes.LOGIN_SCREEN)
-        }
-    )
 }
-
-
-
-
