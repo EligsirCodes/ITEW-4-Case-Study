@@ -44,7 +44,7 @@ fun DashboardScreen(navController: NavController) {
                 }
             )
         }
-    ) {
-
+    )
+    {
                 }
             }
