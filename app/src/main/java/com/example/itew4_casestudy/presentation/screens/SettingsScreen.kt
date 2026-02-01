@@ -15,5 +15,9 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun SettingsScreen(navController: NavController) {
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
 
+    var isDarkMode by remember { mutableStateOf(false) }
+    var isNotificationsOn by remember { mutableStateOf(false) }
 }
