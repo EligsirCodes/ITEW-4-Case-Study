@@ -3,7 +3,6 @@ package com.example.itew4_casestudy.presentation.screens
 import android.content.Context
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -13,8 +12,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -120,6 +117,34 @@ fun LoginScreen(navController: NavController) {
                     textFieldLabel = "Password",
                     leadingIcon = Icons.Filled.Lock
                 )
+            }
+        )
+
+        ButtonTemplate(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
+            onClick = {
+                if (userName == "Admin" && password == "123") {
+                    sharedPrefs.edit()
+                        .putBoolean("is_logged_in", true)
+                        .apply()
+
+                    navController.navigate(Routes.DASHBOARD_SCREEN) {
+                        popUpTo(Routes.LOGIN_SCREEN) {
+                            inclusive = true
+                        }
+                    }
+                }
+            },
+            buttonText = "Log In"
+        )
+
+        LogInOrSignUpLayout(
+            initialText = "Don't have an account? ",
+            underlinedText = "Sign Up",
+            onClick = {
+                navController.navigate(Routes.REGISTRATION_SCREEN)
             }
         )
     }
