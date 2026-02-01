@@ -107,7 +107,37 @@ fun RegistrationScreen(navController: NavController) {
             )
         }
     )
+    TextFieldLayout(
+        layoutLabel = "Confirm Password",
+        innerComposable = {
+            PasswordTextFieldTemplate(
+                value = confirmPassword,
+                valueUpdate = {
+                    confirmPassword = it
+                },
+                textFieldLabel = "Confirm Password",
+                leadingIcon = Icons.Filled.Lock
+            )
+        }
+    )
 
+    ButtonTemplate(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
+        onClick = { },
+        buttonText = "Register"
+    )
 
+    LogInOrSignUpLayout(
+        initialText = "Already have an account? ",
+        underlinedText = "Log in here",
+        onClick = {
+            navController.navigate(Routes.LOGIN_SCREEN)
+        }
+    )
 }
+
+
+
 
