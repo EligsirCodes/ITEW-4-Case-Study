@@ -304,3 +304,5 @@ If you encounter issues:
 - [GitHub Docs](https://docs.github.com)
 - [Git Cheat Sheet](https://education.github.com/git-cheat-sheet-education.pdf)
 - [Atlassian Git Tutorials](https://www.atlassian.com/git/tutorials)
+
+#### NOTE: This Serves as our Official Documentation of the Group according on what is provided.
