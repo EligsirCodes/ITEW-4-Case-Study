@@ -98,6 +98,33 @@ fun TaskScreen(navController: NavController) {
                         thickness = 5.dp,
                         color = Color(red = 13, green = 61, blue = 3)
                     )
+                    CardTemplate(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 20.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color(red = 179, green = 204, blue = 175)
+                        ),
+                        innerComposable = {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                EmboldenedTextTemplate(
+                                    modifier = Modifier
+                                        .padding(20.dp),
+                                    text = "No Tasks Yet",
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
+                    )
+                }
+            }
+        }
+    }
 
 
                 }
