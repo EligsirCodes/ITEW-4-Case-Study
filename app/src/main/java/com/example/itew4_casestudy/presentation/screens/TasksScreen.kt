@@ -1,5 +1,6 @@
 package com.example.itew4_casestudy.presentation.screens
 
+import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Task
@@ -30,9 +31,20 @@ fun TaskScreen(navController: NavController) {
                 },
 
                 onLogoutClick = {
+                    val context = navController.context
+                    val sharedPrefs = context.getSharedPreferences(
+                        "user_session",
+                        Context.MODE_PRIVATE
+                    )
+
+                    sharedPrefs.edit()
+                        .putBoolean("is_logged_in", false)
+                        .apply()
+
                     scope.launch {
                         drawerState.close()
                     }
+
                     navController.navigate(Routes.LOGIN_SCREEN) {
                         popUpTo(0) { inclusive = true }
                         launchSingleTop = true
