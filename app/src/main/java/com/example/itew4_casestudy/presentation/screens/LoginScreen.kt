@@ -33,7 +33,7 @@ fun LoginScreen(navController: NavController) {
     )
 
     val scrollState = rememberScrollState()
-    var username by rememberSaveable { mutableStateOf("") }
+    var userName by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
 
     Column(
@@ -94,5 +94,33 @@ fun LoginScreen(navController: NavController) {
                 )
             }
         }
+
+        TextFieldLayout(
+            layoutLabel = "Username",
+            innerComposable = {
+                TextFieldTemplate(
+                    value = userName,
+                    valueUpdate = {
+                        userName = it
+                    },
+                    textFieldLabel = "Username",
+                    icon = Icons.Filled.Person
+                )
+            }
+        )
+
+        TextFieldLayout(
+            layoutLabel = "Password",
+            innerComposable = {
+                PasswordTextFieldTemplate(
+                    value = password,
+                    valueUpdate = {
+                        password = it
+                    },
+                    textFieldLabel = "Password",
+                    leadingIcon = Icons.Filled.Lock
+                )
+            }
+        )
     }
 }
