@@ -17,5 +17,28 @@ import kotlinx.coroutines.launch
 fun TaskScreen(navController: NavController) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            BurgerStackMenuLayout(
 
+                onSettingsClick = {
+                    scope.launch {
+                        drawerState.close()
+                    }
+                    navController.navigate(Routes.SETTINGS_SCREEN)
+                },
+
+                onLogoutClick = {
+                    scope.launch {
+                        drawerState.close()
+                    }
+                    navController.navigate(Routes.LOGIN_SCREEN) {
+                        popUpTo(0) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
+    )
 }
