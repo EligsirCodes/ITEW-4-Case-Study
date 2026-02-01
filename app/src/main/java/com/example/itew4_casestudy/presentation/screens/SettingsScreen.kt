@@ -139,5 +139,45 @@ fun SettingsScreen(navController: NavController) {
                             }
                         }
                     )
+                    CardTemplate(
+                        modifier = Modifier
+                            .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color(red = 179, green = 204, blue = 175)
+                        ),
+                        innerComposable = {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                EmboldenedTextTemplate(
+                                    modifier = Modifier
+                                        .padding(20.dp),
+                                    text = "Notifications"
+                                )
+
+                                Switch(
+                                    modifier = Modifier
+                                        .padding(end = 20.dp),
+                                    checked = isNotificationsOn,
+                                    onCheckedChange = { isNotificationsOn = it },
+                                    colors = SwitchDefaults.colors(
+                                        checkedThumbColor = Color.White,
+                                        checkedTrackColor = Color(red = 13, green = 61, blue = 3),
+                                        uncheckedThumbColor = Color(red = 13, green = 61, blue = 3),
+                                        uncheckedTrackColor = Color.White,
+                                        checkedBorderColor = Color.White,
+                                        uncheckedBorderColor = Color(red = 13, green = 61, blue = 3)
+                                    )
+                                )
+                            }
+                        }
+                    )
+                }
+            }
+        }
+    }
 
 }
