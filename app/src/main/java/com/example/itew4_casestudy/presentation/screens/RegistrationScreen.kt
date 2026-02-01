@@ -34,33 +34,49 @@ fun RegistrationScreen(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        CircleLayout(
+            modifier = Modifier
+                .padding(bottom = 10.dp)
+                .size(100.dp)
+                .shadow(
+                    elevation = 10.dp,
+                    shape = CircleShape,
+                    clip = false
+                )
+                .border(
+                    width = 5.dp,
+                    color = Color(red = 13, green = 61, blue = 3),
+                    shape = CircleShape
+                )
+                .clip(CircleShape),
+            innerComposable = {
+                Image(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    painter = painterResource(R.drawable.pnclogo),
+                    contentDescription = "PNC Logo"
+                )
+            }
+        )
         Column(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .background(Color(red = 179, green = 204, blue = 175)),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CircleLayout(
+            EmboldenedTextTemplate(
+                text = "Welcome to PNC Buddy",
                 modifier = Modifier
-                    .padding(bottom = 10.dp)
-                    .size(100.dp)
-                    .shadow(
-                        elevation = 10.dp,
-                        shape = CircleShape,
-                        clip = false
-                    )
-                    .border(
-                        width = 5.dp,
-                        color = Color(red = 13, green = 61, blue = 3),
-                        shape = CircleShape
-                    )
-                    .clip(CircleShape),
-                innerComposable = {
-                    Image(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        painter = painterResource(R.drawable.pnclogo),
-                        contentDescription = "PNC Logo"
-                    )
-                }
+                    .padding(top = 20.dp, bottom = 5.dp)
             )
+
+            NormalTextTemplate(
+                text = "Sign up now",
+                modifier = Modifier
+                    .padding(top = 5.dp, bottom = 20.dp)
+            )
+        }
+
+    }
+}
