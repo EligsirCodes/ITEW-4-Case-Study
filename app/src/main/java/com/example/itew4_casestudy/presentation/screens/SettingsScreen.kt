@@ -20,4 +20,29 @@ fun SettingsScreen(navController: NavController) {
 
     var isDarkMode by remember { mutableStateOf(false) }
     var isNotificationsOn by remember { mutableStateOf(false) }
+
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            BurgerStackMenuLayout(
+
+                onSettingsClick = {
+                    scope.launch {
+                        drawerState.close()
+                    }
+                    navController.navigate(Routes.SETTINGS_SCREEN)
+                },
+
+                onLogoutClick = {
+                    scope.launch {
+                        drawerState.close()
+                    }
+                    navController.navigate(Routes.LOGIN_SCREEN) {
+                        popUpTo(0) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
+    )
 }
