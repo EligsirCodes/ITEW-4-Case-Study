@@ -22,7 +22,6 @@ fun TaskScreen(navController: NavController) {
         drawerState = drawerState,
         drawerContent = {
             BurgerStackMenuLayout(
-
                 onSettingsClick = {
                     scope.launch {
                         drawerState.close()
@@ -65,7 +64,7 @@ fun TaskScreen(navController: NavController) {
                     }
                 )
             },
-            bottomBar = { BottomBarLayout( navController = navController, selectionIdentifier = 4) }
+            bottomBar = { BottomBarLayout( navController = navController, selectionIdentifier = 3) }
         ) { innerPadding ->
             Column(
                 modifier = Modifier

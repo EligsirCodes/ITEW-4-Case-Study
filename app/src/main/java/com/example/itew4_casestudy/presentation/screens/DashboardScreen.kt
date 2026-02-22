@@ -26,14 +26,12 @@ fun DashboardScreen(navController: NavController) {
         drawerState = drawerState,
         drawerContent = {
             BurgerStackMenuLayout(
-
                 onSettingsClick = {
                     scope.launch {
                         drawerState.close()
                     }
                     navController.navigate(Routes.SETTINGS_SCREEN)
                 },
-
                 onLogoutClick = {
                     val context = navController.context
                     val sharedPrefs = context.getSharedPreferences(

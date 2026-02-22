@@ -55,40 +55,10 @@ fun TopBarLayout(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-//                CircleLayout(
-//                    modifier = Modifier
-//                        .padding(end = 10.dp)
-//                        .height(35.dp)
-//                        .shadow(
-//                            elevation = 8.dp,
-//                            shape = CircleShape,
-//                            clip = false
-//                        )
-//                        .border(
-//                            width = 2.dp,
-//                            color = Color(red = 179, green = 204, blue = 175),
-//                            shape = CircleShape
-//                        )
-//                        .clip(CircleShape),
-//                    innerComposable = {
-//                        Image(
-//                            modifier = Modifier
-//                                .fillMaxHeight(),
-//                            painter = painterResource(R.drawable.pnclogo),
-//                            contentDescription = "PNC Logo"
-//                        )
-//                    }
-//                )
-
                 EmboldenedTextTemplate(
                     text = "PNC Buddy",
                     color = Color.White
                 )
-//                Text(
-//                    text = "PNC Buddy",
-//                    fontWeight = FontWeight.Bold,
-//                    fontSize = 23.sp
-//                )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
@@ -146,7 +116,7 @@ fun BottomBarLayout(
                 Icon(
                     modifier = Modifier
                         .size(35.dp),
-                    imageVector = if (selectionIdentifier == 3) Icons.Filled.Home else Icons.Outlined.Home,
+                    imageVector = Icons.Outlined.Home,
                     contentDescription = "Home Icon",
                     tint = Color(red = 179, green = 204, blue = 175)
                 )
@@ -162,7 +132,7 @@ fun BottomBarLayout(
                 Icon(
                     modifier = Modifier
                         .size(35.dp),
-                    imageVector = if (selectionIdentifier == 4) Icons.Filled.Task else Icons.Outlined.Task,
+                    imageVector = if (selectionIdentifier == 3) Icons.Filled.Task else Icons.Outlined.Task,
                     contentDescription = "Tasks Icon",
                     tint = Color(red = 179, green = 204, blue = 175)
                 )
@@ -178,7 +148,7 @@ fun BottomBarLayout(
                 Icon(
                     modifier = Modifier
                         .size(35.dp),
-                    imageVector = if (selectionIdentifier == 5) Icons.Filled.Settings else Icons.Outlined.Settings,
+                    imageVector = if (selectionIdentifier == 4) Icons.Filled.Settings else Icons.Outlined.Settings,
                     contentDescription = "Settings Icon",
                     tint = Color(red = 179, green = 204, blue = 175)
                 )

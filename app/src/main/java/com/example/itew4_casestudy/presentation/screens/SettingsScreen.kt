@@ -69,7 +69,7 @@ fun SettingsScreen(navController: NavController) {
                     }
                 )
             },
-            bottomBar = { BottomBarLayout( navController = navController, selectionIdentifier = 5) }
+            bottomBar = { BottomBarLayout( navController = navController, selectionIdentifier = 4) }
         ) { innerPadding ->
             Column(
                 modifier = Modifier
