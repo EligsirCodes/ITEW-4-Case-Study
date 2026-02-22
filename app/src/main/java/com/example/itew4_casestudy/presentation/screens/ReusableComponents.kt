@@ -212,9 +212,10 @@ fun BurgerStackMenuLayout(
                     tint = Color(red = 179, green = 204, blue = 175)
                 )
 
-                NormalTextTemplate(
+                EmboldenedTextTemplate(
                     text = "Settings",
                     textAlign = TextAlign.Center,
+                    fontSize = 18.sp,
                     color = Color.White
                 )
             }
@@ -244,9 +245,10 @@ fun BurgerStackMenuLayout(
                     tint = Color(red = 179, green = 204, blue = 175)
                 )
 
-                NormalTextTemplate(
+                EmboldenedTextTemplate(
                     text = "Logout",
                     textAlign = TextAlign.Center,
+                    fontSize = 18.sp,
                     color = Color.White
                 )
             }

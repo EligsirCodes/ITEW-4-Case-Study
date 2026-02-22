@@ -2,6 +2,7 @@ package com.example.itew4_casestudy.presentation.screens
 
 import android.content.Context
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Task
 import androidx.compose.material3.*
@@ -18,6 +19,7 @@ import kotlinx.coroutines.launch
 fun TaskScreen(navController: NavController) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -28,7 +30,6 @@ fun TaskScreen(navController: NavController) {
                     }
                     navController.navigate(Routes.SETTINGS_SCREEN)
                 },
-
                 onLogoutClick = {
                     val context = navController.context
                     val sharedPrefs = context.getSharedPreferences(
@@ -70,13 +71,13 @@ fun TaskScreen(navController: NavController) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding),
-                verticalArrangement = Arrangement.Top,
+                verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth(),
-                    verticalArrangement = Arrangement.Top,
+                    verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Row(
@@ -87,8 +88,8 @@ fun TaskScreen(navController: NavController) {
                     ) {
                         Icon(
                             modifier = Modifier
-                                .padding(start = 20.dp, end = 10.dp, top = 20.dp, bottom = 10.dp)
-                                .size(50.dp),
+                                .padding(start = 20.dp, end = 30.dp, top = 15.dp, bottom = 5.dp)
+                                .size(40.dp),
                             imageVector = Icons.Filled.Task,
                             contentDescription = "Task Icon",
                             tint = Color(red = 13, green = 61, blue = 3)
@@ -96,46 +97,45 @@ fun TaskScreen(navController: NavController) {
 
                         EmboldenedTextTemplate(
                             modifier = Modifier
-                                .padding(top = 20.dp, bottom = 10.dp),
+                                .padding(top = 10.dp, bottom = 5.dp),
                             text = "Tasks",
-                            textAlign = TextAlign.Center,
-                            fontSize = 30.sp
+                            textAlign = TextAlign.Left
                         )
                     }
 
                     HorizontalDivider(
                         modifier = Modifier
-                            .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 10.dp),
-                        thickness = 5.dp,
+                            .padding(10.dp),
+                        thickness = 3.dp,
                         color = Color(red = 13, green = 61, blue = 3)
                     )
-                    CardTemplate(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 20.dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = Color(red = 179, green = 204, blue = 175)
-                        ),
-                        innerComposable = {
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                verticalArrangement = Arrangement.Center,
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                EmboldenedTextTemplate(
-                                    modifier = Modifier
-                                        .padding(20.dp),
-                                    text = "No Tasks Yet",
-                                    textAlign = TextAlign.Center
-                                )
-                            }
-                        }
-                    )
+
+//                    CardTemplate(
+//                        modifier = Modifier
+//                            .fillMaxSize()
+//                            .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 20.dp),
+//                        colors = CardDefaults.cardColors(
+//                            containerColor = Color(red = 179, green = 204, blue = 175)
+//                        ),
+//                        innerComposable = {
+//                            Column(
+//                                modifier = Modifier
+//                                    .fillMaxWidth(),
+//                                verticalArrangement = Arrangement.Center,
+//                                horizontalAlignment = Alignment.CenterHorizontally
+//                            ) {
+//                                EmboldenedTextTemplate(
+//                                    modifier = Modifier
+//                                        .padding(20.dp),
+//                                    text = "No Tasks Yet",
+//                                    textAlign = TextAlign.Center
+//                                )
+//                            }
+//                        }
+//                    )
+
                 }
             }
         }
     }
-
-
-                }
+}

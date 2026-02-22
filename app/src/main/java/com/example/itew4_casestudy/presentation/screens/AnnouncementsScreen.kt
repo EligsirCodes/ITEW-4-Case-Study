@@ -7,7 +7,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -90,8 +89,8 @@ fun AnnouncementsScreen(navController: NavController) {
                     ) {
                         Icon(
                             modifier = Modifier
-                                .padding(start = 20.dp, end = 30.dp, top = 20.dp, bottom = 10.dp)
-                                .size(50.dp),
+                                .padding(start = 20.dp, end = 30.dp, top = 15.dp, bottom = 5.dp)
+                                .size(40.dp),
                             imageVector = Icons.Filled.Announcement,
                             contentDescription = "Announcement Icon",
                             tint = Color(red = 13, green = 61, blue = 3)
@@ -99,7 +98,7 @@ fun AnnouncementsScreen(navController: NavController) {
 
                         EmboldenedTextTemplate(
                             modifier = Modifier
-                                .padding(top = 20.dp, bottom = 10.dp),
+                                .padding(top = 10.dp, bottom = 5.dp),
                             text = "University Announcements",
                             textAlign = TextAlign.Left
                         )
@@ -107,7 +106,7 @@ fun AnnouncementsScreen(navController: NavController) {
 
                     HorizontalDivider(
                         modifier = Modifier
-                            .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 10.dp),
+                            .padding(10.dp),
                         thickness = 3.dp,
                         color = Color(red = 13, green = 61, blue = 3)
                     )
