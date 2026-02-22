@@ -75,13 +75,13 @@ fun RegistrationScreen(navController: NavController) {
                 EmboldenedTextTemplate(
                     text = "Welcome to PNC Buddy",
                     modifier = Modifier
-                        .padding(top = 20.dp, bottom = 5.dp)
+                        .padding(top = 15.dp, bottom = 5.dp)
                 )
 
                 NormalTextTemplate(
                     text = "Sign up now",
                     modifier = Modifier
-                        .padding(top = 5.dp, bottom = 20.dp)
+                        .padding(top = 5.dp, bottom = 15.dp)
                 )
             }
         }
@@ -152,7 +152,7 @@ fun RegistrationScreen(navController: NavController) {
 
         LogInOrSignUpLayout(
             initialText = "Already have an account? ",
-            underlinedText = "Log in here",
+            highlightedText = "Log in here",
             onClick = {
                 navController.navigate(Routes.LOGIN_SCREEN)
             }

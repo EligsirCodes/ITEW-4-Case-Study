@@ -48,7 +48,7 @@ fun LoginScreen(navController: NavController) {
         ) {
             CircleLayout(
                 modifier = Modifier
-                    .padding(bottom = 10.dp)
+                    .padding(bottom = 20.dp)
                     .size(220.dp)
                     .shadow(
                         elevation = 10.dp,
@@ -81,13 +81,13 @@ fun LoginScreen(navController: NavController) {
                 EmboldenedTextTemplate(
                     text = "Welcome to PNC Buddy",
                     modifier = Modifier
-                        .padding(top = 20.dp, bottom = 5.dp)
+                        .padding(top = 15.dp, bottom = 5.dp)
                 )
 
                 NormalTextTemplate(
                     text = "Log in to your account",
                     modifier = Modifier
-                        .padding(top = 5.dp, bottom = 20.dp)
+                        .padding(top = 5.dp, bottom = 15.dp)
                 )
             }
         }
@@ -125,7 +125,7 @@ fun LoginScreen(navController: NavController) {
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
             onClick = {
-                if (userName == "Admin" && password == "123") {
+                if (userName == "q" && password == "q") {
                     sharedPrefs.edit()
                         .putBoolean("is_logged_in", true)
                         .apply()
@@ -142,7 +142,7 @@ fun LoginScreen(navController: NavController) {
 
         LogInOrSignUpLayout(
             initialText = "Don't have an account? ",
-            underlinedText = "Sign Up",
+            highlightedText = "Sign Up",
             onClick = {
                 navController.navigate(Routes.REGISTRATION_SCREEN)
             }

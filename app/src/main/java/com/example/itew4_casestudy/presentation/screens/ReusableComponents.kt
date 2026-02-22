@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.text.style.*
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.*
 import androidx.navigation.NavController
@@ -411,7 +412,7 @@ fun OfficeBarLayout(
 @Composable
 fun LogInOrSignUpLayout(
     initialText: String,
-    underlinedText: String,
+    highlightedText: String,
     onClick: () -> Unit
 ) {
     Row(
@@ -430,9 +431,8 @@ fun LogInOrSignUpLayout(
                 .clickable(
                     onClick = onClick
                 ),
-            text = underlinedText,
+            text = highlightedText,
             fontWeight = FontWeight.Bold,
-            textDecoration = TextDecoration.Underline,
             color = Color(red = 13, green = 61, blue = 3),
             fontSize = 15.sp
         )
@@ -473,7 +473,7 @@ fun EmboldenedTextTemplate(
     modifier: Modifier = Modifier,
     text: String,
     textAlign: TextAlign = TextAlign.Left,
-    fontSize: TextUnit = 25.sp,
+    fontSize: TextUnit = 23.sp,
     color: Color = Color(red = 13, green = 61, blue = 3)
 ) {
     Text(
@@ -491,7 +491,7 @@ fun NormalTextTemplate(
     modifier: Modifier = Modifier,
     text: String,
     textAlign: TextAlign = TextAlign.Left,
-    fontSize: TextUnit = 20.sp,
+    fontSize: TextUnit = 18.sp,
     color: Color = Color.Black
 ) {
     Text(
@@ -539,7 +539,7 @@ fun ButtonTemplate(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     buttonText: String,
-    fontSize: TextUnit = 20.sp
+    fontSize: TextUnit = 17.sp
 ) {
     Button(
         modifier = modifier,
@@ -576,7 +576,8 @@ fun TextFieldTemplate(
         onValueChange = valueUpdate,
         placeholder = {
             Text(
-                text = textFieldLabel
+                text = textFieldLabel,
+                fontSize = 15.sp
             )
         },
         leadingIcon = {
@@ -586,6 +587,7 @@ fun TextFieldTemplate(
                 tint = Color(0xFF0D3D03)
             )
         },
+        textStyle = TextStyle(fontSize = 15.sp),
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = Color(red = 13, green = 61, blue = 3),
             unfocusedBorderColor = Color(red = 13, green = 61, blue = 3)
@@ -610,10 +612,10 @@ fun PasswordTextFieldTemplate(
         onValueChange = valueUpdate,
         placeholder = {
             Text(
-                text = textFieldLabel
+                text = textFieldLabel,
+                fontSize = 15.sp
             )
         },
-
         leadingIcon = {
             Icon(
                 imageVector = leadingIcon,
@@ -621,7 +623,7 @@ fun PasswordTextFieldTemplate(
                 tint = Color(0xFF0D3D03)
             )
         },
-
+        textStyle = TextStyle(fontSize = 15.sp),
         trailingIcon = {
             IconButton(onClick = { passwordVisible = !passwordVisible }) {
                 Icon(
