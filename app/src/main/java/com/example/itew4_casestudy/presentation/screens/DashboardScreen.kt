@@ -110,14 +110,14 @@ fun DashboardScreen(navController: NavController) {
                             ) {
                                 EmboldenedTextTemplate(
                                     text = "J",
-                                    fontSize = 45.sp
+                                    fontSize = 35.sp
                                 )
                             }
                         }
                     )
 
                     VerticalDivider(
-                        thickness = 5.dp,
+                        thickness = 3.dp,
                         color = Color(red = 13, green = 61, blue = 3)
                     )
 
@@ -129,12 +129,12 @@ fun DashboardScreen(navController: NavController) {
                     ) {
                         NormalTextTemplate(
                             text = "Dangal Greetings!",
-                            fontSize = 25.sp
+                            fontSize = 23.sp
                         )
 
                         EmboldenedTextTemplate(
                             text = "John Doe",
-                            fontSize = 30.sp
+                            fontSize = 28.sp
                         )
                     }
                 }
@@ -150,13 +150,13 @@ fun DashboardScreen(navController: NavController) {
                     EmboldenedTextTemplate(
                         text = "Welcome to PNC Buddy",
                         modifier = Modifier
-                            .padding(top = 20.dp, bottom = 5.dp)
+                            .padding(top = 15.dp, bottom = 5.dp)
                     )
 
                     NormalTextTemplate(
                         text = "What shall we do today?",
                         modifier = Modifier
-                            .padding(top = 5.dp, bottom = 20.dp)
+                            .padding(top = 5.dp, bottom = 15.dp)
                     )
                 }
 
@@ -254,6 +254,6 @@ fun DashboardScreen(navController: NavController) {
                     )
                 }
             }
-            }
         }
     }
+}

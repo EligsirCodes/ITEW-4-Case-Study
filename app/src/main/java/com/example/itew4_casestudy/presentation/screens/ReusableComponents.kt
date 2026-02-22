@@ -17,8 +17,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.*
-import androidx.compose.ui.text.style.*
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.*
 import androidx.navigation.NavController
@@ -41,7 +41,7 @@ fun TopBarLayout(
             ) {
                 Icon(
                     modifier = Modifier
-                        .size(80.dp),
+                        .size(30.dp),
                     imageVector = Icons.Filled.Menu,
                     contentDescription = "Menu Icon",
                     tint = Color.White
@@ -55,36 +55,40 @@ fun TopBarLayout(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                CircleLayout(
-                    modifier = Modifier
-                        .padding(end = 10.dp)
-                        .height(35.dp)
-                        .shadow(
-                            elevation = 8.dp,
-                            shape = CircleShape,
-                            clip = false
-                        )
-                        .border(
-                            width = 2.dp,
-                            color = Color(red = 179, green = 204, blue = 175),
-                            shape = CircleShape
-                        )
-                        .clip(CircleShape),
-                    innerComposable = {
-                        Image(
-                            modifier = Modifier
-                                .fillMaxHeight(),
-                            painter = painterResource(R.drawable.pnclogo),
-                            contentDescription = "PNC Logo"
-                        )
-                    }
-                )
+//                CircleLayout(
+//                    modifier = Modifier
+//                        .padding(end = 10.dp)
+//                        .height(35.dp)
+//                        .shadow(
+//                            elevation = 8.dp,
+//                            shape = CircleShape,
+//                            clip = false
+//                        )
+//                        .border(
+//                            width = 2.dp,
+//                            color = Color(red = 179, green = 204, blue = 175),
+//                            shape = CircleShape
+//                        )
+//                        .clip(CircleShape),
+//                    innerComposable = {
+//                        Image(
+//                            modifier = Modifier
+//                                .fillMaxHeight(),
+//                            painter = painterResource(R.drawable.pnclogo),
+//                            contentDescription = "PNC Logo"
+//                        )
+//                    }
+//                )
 
-                Text(
+                EmboldenedTextTemplate(
                     text = "PNC Buddy",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
+                    color = Color.White
                 )
+//                Text(
+//                    text = "PNC Buddy",
+//                    fontWeight = FontWeight.Bold,
+//                    fontSize = 23.sp
+//                )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
@@ -202,26 +206,25 @@ fun BurgerStackMenuLayout(
     ) {
         EmboldenedTextTemplate(
             modifier = Modifier
-                .padding(top = 50.dp),
-            text = "Menu",
+                .padding(top = 60.dp),
+            text = "PNC Buddy",
             textAlign = TextAlign.Center,
-            fontSize = 30.sp
         )
 
         HorizontalDivider(
             modifier = Modifier
-                .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
-            thickness = 5.dp,
+                .padding(start = 15.dp, end = 15.dp, top = 10.dp, bottom = 10.dp),
+            thickness = 3.dp,
             color = Color(red = 13, green = 61, blue = 3)
         )
 
         CardTemplate(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 5.dp),
+                .padding(start = 15.dp, end = 15.dp, top = 5.dp, bottom = 5.dp),
             onClick = onSettingsClick,
             colors = CardDefaults.cardColors(
-                containerColor = Color(red = 179, green = 204, blue = 175)
+                containerColor = Color(red = 13, green = 61, blue = 3)
             )
         ) {
             Row(
@@ -232,18 +235,17 @@ fun BurgerStackMenuLayout(
             ) {
                 Icon(
                     modifier = Modifier
-                        .size(45.dp)
-                        .padding(10.dp),
+                        .padding(10.dp)
+                        .size(25.dp),
                     imageVector = Icons.Filled.Settings,
                     contentDescription = "Settings Icon",
-                    tint = Color(red = 13, green = 61, blue = 3)
+                    tint = Color(red = 179, green = 204, blue = 175)
                 )
 
-                EmboldenedTextTemplate(
+                NormalTextTemplate(
                     text = "Settings",
                     textAlign = TextAlign.Center,
-                    color = Color(red = 13, green = 61, blue = 3),
-                    fontSize = 20.sp
+                    color = Color.White
                 )
             }
         }
@@ -251,10 +253,10 @@ fun BurgerStackMenuLayout(
         CardTemplate(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 5.dp),
+                .padding(start = 15.dp, end = 15.dp, top = 5.dp, bottom = 5.dp),
             onClick = onLogoutClick,
             colors = CardDefaults.cardColors(
-                containerColor = Color(red = 179, green = 204, blue = 175)
+                containerColor = Color(red = 13, green = 61, blue = 3)
             )
         ) {
             Row(
@@ -265,18 +267,17 @@ fun BurgerStackMenuLayout(
             ) {
                 Icon(
                     modifier = Modifier
-                        .size(45.dp)
-                        .padding(10.dp),
+                        .padding(10.dp)
+                        .size(25.dp),
                     imageVector = Icons.Filled.ExitToApp,
                     contentDescription = "Log Out Icon",
-                    tint = Color(red = 13, green = 61, blue = 3)
+                    tint = Color(red = 179, green = 204, blue = 175)
                 )
 
-                EmboldenedTextTemplate(
+                NormalTextTemplate(
                     text = "Logout",
                     textAlign = TextAlign.Center,
-                    color = Color(red = 13, green = 61, blue = 3),
-                    fontSize = 20.sp
+                    color = Color.White
                 )
             }
         }
@@ -461,8 +462,8 @@ fun OptionLayout(
         Text(
             text = optionText,
             color = Color.White,
-            fontWeight = FontWeight.Bold,
-            fontSize = 17.sp
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 18.sp
         )
     }
 }
