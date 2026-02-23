@@ -2,13 +2,12 @@ package com.example.itew4_casestudy.presentation.screens
 
 import android.content.Context
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.*
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
 import androidx.navigation.NavController
 import com.example.itew4_casestudy.navigation.Routes
@@ -26,14 +25,12 @@ fun SettingsScreen(navController: NavController) {
         drawerState = drawerState,
         drawerContent = {
             BurgerStackMenuLayout(
-
                 onSettingsClick = {
                     scope.launch {
                         drawerState.close()
                     }
                     navController.navigate(Routes.SETTINGS_SCREEN)
                 },
-
                 onLogoutClick = {
                     val context = navController.context
                     val sharedPrefs = context.getSharedPreferences(
@@ -92,8 +89,8 @@ fun SettingsScreen(navController: NavController) {
                     ) {
                         Icon(
                             modifier = Modifier
-                                .padding(start = 20.dp, end = 10.dp, top = 20.dp, bottom = 10.dp)
-                                .size(50.dp),
+                                .padding(start = 20.dp, end = 30.dp, top = 15.dp, bottom = 5.dp)
+                                .size(40.dp),
                             imageVector = Icons.Filled.Settings,
                             contentDescription = "Settings Icon",
                             tint = Color(red = 13, green = 61, blue = 3)
@@ -101,17 +98,15 @@ fun SettingsScreen(navController: NavController) {
 
                         EmboldenedTextTemplate(
                             modifier = Modifier
-                                .padding(top = 20.dp, bottom = 10.dp),
-                            text = "Settings",
-                            textAlign = TextAlign.Center,
-                            fontSize = 30.sp
+                                .padding(top = 10.dp, bottom = 5.dp),
+                            text = "Settings"
                         )
                     }
 
                     HorizontalDivider(
                         modifier = Modifier
-                            .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 10.dp),
-                        thickness = 5.dp,
+                            .padding(10.dp),
+                        thickness = 3.dp,
                         color = Color(red = 13, green = 61, blue = 3)
                     )
 
@@ -130,8 +125,9 @@ fun SettingsScreen(navController: NavController) {
                             ) {
                                 EmboldenedTextTemplate(
                                     modifier = Modifier
-                                        .padding(20.dp),
-                                    text = "Dark Mode"
+                                        .padding(15.dp),
+                                    text = "Dark Mode",
+                                    fontSize = 18.sp
                                 )
 
                                 Switch(
@@ -151,6 +147,7 @@ fun SettingsScreen(navController: NavController) {
                             }
                         }
                     )
+
                     CardTemplate(
                         modifier = Modifier
                             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp),
@@ -166,8 +163,9 @@ fun SettingsScreen(navController: NavController) {
                             ) {
                                 EmboldenedTextTemplate(
                                     modifier = Modifier
-                                        .padding(20.dp),
-                                    text = "Notifications"
+                                        .padding(15.dp),
+                                    text = "Notifications",
+                                    fontSize = 18.sp
                                 )
 
                                 Switch(
@@ -191,5 +189,4 @@ fun SettingsScreen(navController: NavController) {
             }
         }
     }
-
 }
