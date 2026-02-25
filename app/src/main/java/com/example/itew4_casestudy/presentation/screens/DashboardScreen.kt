@@ -80,7 +80,7 @@ fun DashboardScreen(navController: NavController) {
             ) {
                 Column(
                     modifier = Modifier
-                        .padding(top = 20.dp, bottom = 5.dp),
+                        .padding(top = 15.dp, bottom = 15.dp),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
