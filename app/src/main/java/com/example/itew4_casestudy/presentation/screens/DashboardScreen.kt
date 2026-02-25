@@ -3,15 +3,19 @@ package com.example.itew4_casestudy.presentation.screens
 import android.content.Context
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
 import androidx.navigation.NavController
 import com.example.itew4_casestudy.navigation.Routes
@@ -72,70 +76,32 @@ fun DashboardScreen(navController: NavController) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding),
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Row(
+                Column(
                     modifier = Modifier
-                        .padding(bottom = 10.dp)
-                        .fillMaxWidth()
-                        .height(125.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.CenterVertically
+                        .padding(top = 20.dp, bottom = 10.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    CircleLayout(
+                    NormalTextTemplate(
                         modifier = Modifier
-                            .padding(top = 10.dp, bottom = 5.dp)
-                            .size(100.dp)
-                            .shadow(
-                                elevation = 10.dp,
-                                shape = CircleShape,
-                                clip = false
-                            )
-                            .border(
-                                width = 3.dp,
-                                color = Color(red = 13, green = 61, blue = 3),
-                                shape = CircleShape
-                            )
-                            .clip(CircleShape),
-                        innerComposable = {
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .background(Color(red = 179, green = 204, blue = 175)),
-                                verticalArrangement = Arrangement.Center,
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                EmboldenedTextTemplate(
-                                    text = "J",
-                                    fontSize = 35.sp
-                                )
-                            }
-                        }
+                            .padding(bottom = 5.dp),
+                        text = "Dangal Greetings!",
+                        textAlign = TextAlign.Center,
+                        fontSize = 23.sp
                     )
 
-                    VerticalDivider(
-                        thickness = 3.dp,
-                        color = Color(red = 13, green = 61, blue = 3)
-                    )
-
-                    Column(
+                    EmboldenedTextTemplate(
                         modifier = Modifier
-                            .fillMaxHeight(),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.Start
-                    ) {
-                        NormalTextTemplate(
-                            text = "Dangal Greetings!",
-                            fontSize = 23.sp
-                        )
-
-                        EmboldenedTextTemplate(
-                            text = "John Doe",
-                            fontSize = 28.sp
-                        )
-                    }
+                            .padding(top = 5.dp),
+                        text = "Luiz Gabriel Rosales",
+                        textAlign = TextAlign.Center,
+                        fontSize = 28.sp
+                    )
                 }
+
 
                 Column(
                     modifier = Modifier

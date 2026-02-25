@@ -96,7 +96,7 @@ fun TaskScreen(navController: NavController) {
 
                         EmboldenedTextTemplate(
                             modifier = Modifier
-                                .padding(top = 10.dp, bottom = 5.dp),
+                                .padding(top = 15.dp, bottom = 5.dp),
                             text = "Tasks"
                         )
                     }
