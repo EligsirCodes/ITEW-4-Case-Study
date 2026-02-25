@@ -80,14 +80,14 @@ fun DashboardScreen(navController: NavController) {
             ) {
                 Column(
                     modifier = Modifier
-                        .padding(top = 10.dp, bottom = 10.dp),
+                        .padding(top = 20.dp, bottom = 5.dp),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     CircleLayout(
                         modifier = Modifier
                             .padding(bottom = 10.dp)
-                            .size(80.dp)
+                            .size(90.dp)
                             .shadow(
                                 elevation = 10.dp,
                                 shape = CircleShape,
@@ -108,7 +108,8 @@ fun DashboardScreen(navController: NavController) {
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 EmboldenedTextTemplate(
-                                    text = "J"
+                                    text = "J",
+                                    fontSize = 30.sp
                                 )
                             }
                         }
@@ -135,7 +136,7 @@ fun DashboardScreen(navController: NavController) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 10.dp, bottom = 10.dp)
+                        .padding(top = 5.dp, bottom = 10.dp)
                         .background(Color(red = 179, green = 204, blue = 175)),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
