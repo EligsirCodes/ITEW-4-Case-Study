@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
 import androidx.navigation.NavController
 import com.example.itew4_casestudy.navigation.Routes
+import com.example.itew4_casestudy.presentation.screens.CircleLayout
 import kotlinx.coroutines.launch
 
 @Composable
@@ -81,24 +82,54 @@ fun DashboardScreen(navController: NavController) {
             ) {
                 Column(
                     modifier = Modifier
-                        .padding(top = 20.dp, bottom = 10.dp),
+                        .padding(top = 10.dp, bottom = 10.dp),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    CircleLayout(
+                        modifier = Modifier
+                            .padding(bottom = 10.dp)
+                            .size(80.dp)
+                            .shadow(
+                                elevation = 10.dp,
+                                shape = CircleShape,
+                                clip = false
+                            )
+                            .border(
+                                width = 3.dp,
+                                color = Color(red = 13, green = 61, blue = 3),
+                                shape = CircleShape
+                            )
+                            .clip(CircleShape),
+                        innerComposable = {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(Color(red = 179, green = 204, blue = 175)),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                EmboldenedTextTemplate(
+                                    text = "J"
+                                )
+                            }
+                        }
+                    )
+
                     NormalTextTemplate(
                         modifier = Modifier
                             .padding(bottom = 5.dp),
                         text = "Dangal Greetings!",
                         textAlign = TextAlign.Center,
-                        fontSize = 23.sp
+                        fontSize = 20.sp
                     )
 
                     EmboldenedTextTemplate(
                         modifier = Modifier
                             .padding(top = 5.dp),
-                        text = "Luiz Gabriel Rosales",
+                        text = "John Doe",
                         textAlign = TextAlign.Center,
-                        fontSize = 28.sp
+                        fontSize = 25.sp
                     )
                 }
 
