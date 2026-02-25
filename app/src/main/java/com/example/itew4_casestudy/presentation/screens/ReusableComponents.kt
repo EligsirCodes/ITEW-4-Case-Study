@@ -14,7 +14,6 @@ import androidx.compose.ui.draw.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.text.TextStyle
@@ -22,7 +21,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.*
 import androidx.navigation.NavController
-import com.example.itew4_casestudy.R
 import com.example.itew4_casestudy.navigation.Routes
 
 //LAYOUTS
@@ -300,7 +298,7 @@ fun CourseBarLayout(
     circleLayoutModifier: Modifier = Modifier,
     painter: Painter,
     text: String,
-    fontSize: TextUnit = 17.sp
+    fontSize: TextUnit = 15.sp
 ) {
     CardTemplate(
         modifier = cardTemplateModifier,
@@ -355,7 +353,7 @@ fun CourseBarLayout(
 fun OfficeBarLayout(
     cardTemplateModifier: Modifier = Modifier,
     text: String,
-    fontSize: TextUnit = 20.sp
+    fontSize: TextUnit = 15.sp
 ) {
     CardTemplate(
         modifier = cardTemplateModifier,
@@ -626,16 +624,5 @@ fun PasswordTextFieldTemplate(
             focusedBorderColor = Color(0xFF0D3D03),
             unfocusedBorderColor = Color(0xFF0D3D03)
         )
-    )
-}
-
-@Composable
-fun PNCLogoWithNameTemplate(
-    modifier: Modifier = Modifier
-) {
-    Image(
-        modifier = modifier,
-        painter = painterResource(R.drawable.pnclogowithname),
-        contentDescription = "PNC Logo with Name"
     )
 }
