@@ -25,4 +25,14 @@ class AnnouncementRepository(
         return announcementDao.getUnreadAnnouncements()
     }
 
+    // Mark as read
+    suspend fun markAsRead(id: Int) {
+        announcementDao.markAsRead(id)
+    }
+
+    // Update announcement
+    suspend fun updateAnnouncement(announcement: AnnouncementEntity) {
+        announcementDao.updateAnnouncement(announcement)
+    }
+
 }
