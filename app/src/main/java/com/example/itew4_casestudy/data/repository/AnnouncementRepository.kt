@@ -1,2 +1,14 @@
 package com.example.itew4_casestudy.data.repository
+import com.example.itew4_casestudy.data.local.AnnouncementDao
+import com.example.itew4_casestudy.data.local.AnnouncementEntity
 
+class AnnouncementRepository(
+    private val announcementDao: AnnouncementDao
+) {
+
+    // Insert announcement
+    suspend fun insertAnnouncement(announcement: AnnouncementEntity) {
+        announcementDao.insertAnnouncement(announcement)
+    }
+
+}
