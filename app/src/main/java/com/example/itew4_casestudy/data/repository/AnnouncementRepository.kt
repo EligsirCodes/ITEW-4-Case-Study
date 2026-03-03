@@ -11,4 +11,9 @@ class AnnouncementRepository(
         announcementDao.insertAnnouncement(announcement)
     }
 
+    // Get all announcements
+    suspend fun getAllAnnouncements(): List<AnnouncementEntity> {
+        return announcementDao.getAllAnnouncements()
+    }
+
 }
