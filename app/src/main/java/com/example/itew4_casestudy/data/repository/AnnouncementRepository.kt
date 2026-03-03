@@ -20,4 +20,9 @@ class AnnouncementRepository(
         return announcementDao.getReadAnnouncements()
     }
 
+    // Get unread announcements
+    suspend fun getUnreadAnnouncements(): List<AnnouncementEntity> {
+        return announcementDao.getUnreadAnnouncements()
+    }
+
 }
