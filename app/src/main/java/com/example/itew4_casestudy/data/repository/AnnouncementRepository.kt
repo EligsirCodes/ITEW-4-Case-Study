@@ -15,5 +15,9 @@ class AnnouncementRepository(
     suspend fun getAllAnnouncements(): List<AnnouncementEntity> {
         return announcementDao.getAllAnnouncements()
     }
+    // Get read announcements
+    suspend fun getReadAnnouncements(): List<AnnouncementEntity> {
+        return announcementDao.getReadAnnouncements()
+    }
 
 }
