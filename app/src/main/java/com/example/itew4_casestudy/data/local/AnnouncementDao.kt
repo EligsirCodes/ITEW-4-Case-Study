@@ -28,7 +28,7 @@ interface AnnouncementDao {
     @Query("UPDATE announcements SET isRead = 1 WHERE id = :announcementId")
     suspend fun markAsRead(announcementId: Int)
 
-    // Update whole object if needed
+    // Update whole project if needed
     @Update
     suspend fun updateAnnouncement(announcement: AnnouncementEntity)
 }

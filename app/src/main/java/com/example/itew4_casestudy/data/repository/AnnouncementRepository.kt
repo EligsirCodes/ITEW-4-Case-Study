@@ -1,5 +1,4 @@
 package com.example.itew4_casestudy.data.repository
-
 import com.example.itew4_casestudy.data.local.AnnouncementDao
 import com.example.itew4_casestudy.data.local.AnnouncementEntity
 
@@ -16,7 +15,6 @@ class AnnouncementRepository(
     suspend fun getAllAnnouncements(): List<AnnouncementEntity> {
         return announcementDao.getAllAnnouncements()
     }
-
     // Get read announcements
     suspend fun getReadAnnouncements(): List<AnnouncementEntity> {
         return announcementDao.getReadAnnouncements()
@@ -36,4 +34,5 @@ class AnnouncementRepository(
     suspend fun updateAnnouncement(announcement: AnnouncementEntity) {
         announcementDao.updateAnnouncement(announcement)
     }
+
 }
