@@ -15,4 +15,7 @@ class TaskRepository(
     suspend fun deleteTask(task: TaskEntity) {
         taskDao.deleteTask(task)
     }
+    suspend fun getAllTasks(): List<TaskEntity> {
+        return taskDao.getAllTasks()
+    }
 }
