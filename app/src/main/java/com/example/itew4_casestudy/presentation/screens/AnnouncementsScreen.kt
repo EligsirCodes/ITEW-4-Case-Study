@@ -222,7 +222,7 @@ fun AnnouncementsScreen(navController: NavController) {
                                         modifier = Modifier
                                             .padding(
                                                 start = 20.dp,
-                                                end = 30.dp,
+                                                end = 20.dp,
                                                 top = 10.dp,
                                                 bottom = 10.dp
                                             )
@@ -235,7 +235,8 @@ fun AnnouncementsScreen(navController: NavController) {
                                     EmboldenedTextTemplate(
                                         modifier = Modifier
                                             .padding(top = 10.dp, bottom = 10.dp),
-                                        text = announcement.title
+                                        text = announcement.title,
+                                        fontSize = 20.sp
                                     )
                                 }
 
@@ -261,16 +262,14 @@ fun AnnouncementsScreen(navController: NavController) {
                                             .fillMaxWidth()
                                             .padding(start = 10.dp, end = 10.dp,  bottom = 20.dp),
                                         verticalArrangement = Arrangement.Center,
-                                        horizontalAlignment = Alignment.CenterHorizontally
+                                        horizontalAlignment = Alignment.End
                                     ) {
                                         ButtonTemplate(
-                                            modifier = Modifier
-                                                .fillMaxWidth(),
                                             onClick = {
                                                 viewModel.markAsRead(announcement.id)
                                             },
                                             buttonText = "Mark as read",
-                                            fontSize = 18.sp
+                                            fontSize = 13.sp
                                         )
                                     }
                                 } else {
