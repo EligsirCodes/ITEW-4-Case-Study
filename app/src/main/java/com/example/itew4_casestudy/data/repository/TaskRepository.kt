@@ -9,4 +9,7 @@ class TaskRepository(
     suspend fun insertTask(task: TaskEntity) {
         taskDao.insertTask(task)
     }
+    suspend fun updateTask(task: TaskEntity) {
+        taskDao.updateTask(task)
+    }
 }
