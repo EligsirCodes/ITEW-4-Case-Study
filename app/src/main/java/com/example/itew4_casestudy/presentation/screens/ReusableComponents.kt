@@ -14,14 +14,13 @@ import androidx.compose.ui.draw.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.*
-import androidx.compose.ui.text.style.*
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.*
 import androidx.navigation.NavController
-import com.example.itew4_casestudy.R
 import com.example.itew4_casestudy.navigation.Routes
 
 //LAYOUTS
@@ -40,7 +39,7 @@ fun TopBarLayout(
             ) {
                 Icon(
                     modifier = Modifier
-                        .size(80.dp),
+                        .size(30.dp),
                     imageVector = Icons.Filled.Menu,
                     contentDescription = "Menu Icon",
                     tint = Color.White
@@ -54,35 +53,9 @@ fun TopBarLayout(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                CircleLayout(
-                    modifier = Modifier
-                        .padding(end = 10.dp)
-                        .height(35.dp)
-                        .shadow(
-                            elevation = 8.dp,
-                            shape = CircleShape,
-                            clip = false
-                        )
-                        .border(
-                            width = 2.dp,
-                            color = Color(red = 179, green = 204, blue = 175),
-                            shape = CircleShape
-                        )
-                        .clip(CircleShape),
-                    innerComposable = {
-                        Image(
-                            modifier = Modifier
-                                .fillMaxHeight(),
-                            painter = painterResource(R.drawable.pnclogo),
-                            contentDescription = "PNC Logo"
-                        )
-                    }
-                )
-
-                Text(
+                EmboldenedTextTemplate(
                     text = "PNC Buddy",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
+                    color = Color.White
                 )
             }
         },
@@ -141,7 +114,7 @@ fun BottomBarLayout(
                 Icon(
                     modifier = Modifier
                         .size(35.dp),
-                    imageVector = if (selectionIdentifier == 3) Icons.Filled.Home else Icons.Outlined.Home,
+                    imageVector = Icons.Outlined.Home,
                     contentDescription = "Home Icon",
                     tint = Color(red = 179, green = 204, blue = 175)
                 )
@@ -157,7 +130,7 @@ fun BottomBarLayout(
                 Icon(
                     modifier = Modifier
                         .size(35.dp),
-                    imageVector = if (selectionIdentifier == 4) Icons.Filled.Task else Icons.Outlined.Task,
+                    imageVector = if (selectionIdentifier == 3) Icons.Filled.Task else Icons.Outlined.Task,
                     contentDescription = "Tasks Icon",
                     tint = Color(red = 179, green = 204, blue = 175)
                 )
@@ -173,7 +146,7 @@ fun BottomBarLayout(
                 Icon(
                     modifier = Modifier
                         .size(35.dp),
-                    imageVector = if (selectionIdentifier == 5) Icons.Filled.Settings else Icons.Outlined.Settings,
+                    imageVector = if (selectionIdentifier == 4) Icons.Filled.Settings else Icons.Outlined.Settings,
                     contentDescription = "Settings Icon",
                     tint = Color(red = 179, green = 204, blue = 175)
                 )
@@ -201,26 +174,25 @@ fun BurgerStackMenuLayout(
     ) {
         EmboldenedTextTemplate(
             modifier = Modifier
-                .padding(top = 50.dp),
-            text = "Menu",
+                .padding(top = 60.dp),
+            text = "PNC Buddy",
             textAlign = TextAlign.Center,
-            fontSize = 30.sp
         )
 
         HorizontalDivider(
             modifier = Modifier
-                .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
-            thickness = 5.dp,
+                .padding(start = 15.dp, end = 15.dp, top = 10.dp, bottom = 10.dp),
+            thickness = 3.dp,
             color = Color(red = 13, green = 61, blue = 3)
         )
 
         CardTemplate(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 5.dp),
+                .padding(start = 15.dp, end = 15.dp, top = 5.dp, bottom = 5.dp),
             onClick = onSettingsClick,
             colors = CardDefaults.cardColors(
-                containerColor = Color(red = 179, green = 204, blue = 175)
+                containerColor = Color(red = 13, green = 61, blue = 3)
             )
         ) {
             Row(
@@ -231,18 +203,18 @@ fun BurgerStackMenuLayout(
             ) {
                 Icon(
                     modifier = Modifier
-                        .size(45.dp)
-                        .padding(10.dp),
+                        .padding(10.dp)
+                        .size(25.dp),
                     imageVector = Icons.Filled.Settings,
                     contentDescription = "Settings Icon",
-                    tint = Color(red = 13, green = 61, blue = 3)
+                    tint = Color(red = 179, green = 204, blue = 175)
                 )
 
                 EmboldenedTextTemplate(
                     text = "Settings",
                     textAlign = TextAlign.Center,
-                    color = Color(red = 13, green = 61, blue = 3),
-                    fontSize = 20.sp
+                    fontSize = 18.sp,
+                    color = Color.White
                 )
             }
         }
@@ -250,10 +222,10 @@ fun BurgerStackMenuLayout(
         CardTemplate(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 5.dp),
+                .padding(start = 15.dp, end = 15.dp, top = 5.dp, bottom = 5.dp),
             onClick = onLogoutClick,
             colors = CardDefaults.cardColors(
-                containerColor = Color(red = 179, green = 204, blue = 175)
+                containerColor = Color(red = 13, green = 61, blue = 3)
             )
         ) {
             Row(
@@ -264,18 +236,18 @@ fun BurgerStackMenuLayout(
             ) {
                 Icon(
                     modifier = Modifier
-                        .size(45.dp)
-                        .padding(10.dp),
+                        .padding(10.dp)
+                        .size(25.dp),
                     imageVector = Icons.Filled.ExitToApp,
                     contentDescription = "Log Out Icon",
-                    tint = Color(red = 13, green = 61, blue = 3)
+                    tint = Color(red = 179, green = 204, blue = 175)
                 )
 
                 EmboldenedTextTemplate(
                     text = "Logout",
                     textAlign = TextAlign.Center,
-                    color = Color(red = 13, green = 61, blue = 3),
-                    fontSize = 20.sp
+                    fontSize = 18.sp,
+                    color = Color.White
                 )
             }
         }
@@ -326,7 +298,7 @@ fun CourseBarLayout(
     circleLayoutModifier: Modifier = Modifier,
     painter: Painter,
     text: String,
-    fontSize: TextUnit = 17.sp
+    fontSize: TextUnit = 15.sp
 ) {
     CardTemplate(
         modifier = cardTemplateModifier,
@@ -381,7 +353,7 @@ fun CourseBarLayout(
 fun OfficeBarLayout(
     cardTemplateModifier: Modifier = Modifier,
     text: String,
-    fontSize: TextUnit = 20.sp
+    fontSize: TextUnit = 15.sp
 ) {
     CardTemplate(
         modifier = cardTemplateModifier,
@@ -411,7 +383,7 @@ fun OfficeBarLayout(
 @Composable
 fun LogInOrSignUpLayout(
     initialText: String,
-    underlinedText: String,
+    highlightedText: String,
     onClick: () -> Unit
 ) {
     Row(
@@ -430,9 +402,8 @@ fun LogInOrSignUpLayout(
                 .clickable(
                     onClick = onClick
                 ),
-            text = underlinedText,
+            text = highlightedText,
             fontWeight = FontWeight.Bold,
-            textDecoration = TextDecoration.Underline,
             color = Color(red = 13, green = 61, blue = 3),
             fontSize = 15.sp
         )
@@ -461,8 +432,8 @@ fun OptionLayout(
         Text(
             text = optionText,
             color = Color.White,
-            fontWeight = FontWeight.Bold,
-            fontSize = 17.sp
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 18.sp
         )
     }
 }
@@ -473,7 +444,7 @@ fun EmboldenedTextTemplate(
     modifier: Modifier = Modifier,
     text: String,
     textAlign: TextAlign = TextAlign.Left,
-    fontSize: TextUnit = 25.sp,
+    fontSize: TextUnit = 23.sp,
     color: Color = Color(red = 13, green = 61, blue = 3)
 ) {
     Text(
@@ -491,7 +462,7 @@ fun NormalTextTemplate(
     modifier: Modifier = Modifier,
     text: String,
     textAlign: TextAlign = TextAlign.Left,
-    fontSize: TextUnit = 20.sp,
+    fontSize: TextUnit = 18.sp,
     color: Color = Color.Black
 ) {
     Text(
@@ -539,7 +510,7 @@ fun ButtonTemplate(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     buttonText: String,
-    fontSize: TextUnit = 20.sp
+    fontSize: TextUnit = 17.sp
 ) {
     Button(
         modifier = modifier,
@@ -576,7 +547,8 @@ fun TextFieldTemplate(
         onValueChange = valueUpdate,
         placeholder = {
             Text(
-                text = textFieldLabel
+                text = textFieldLabel,
+                fontSize = 15.sp
             )
         },
         leadingIcon = {
@@ -586,6 +558,7 @@ fun TextFieldTemplate(
                 tint = Color(0xFF0D3D03)
             )
         },
+        textStyle = TextStyle(fontSize = 15.sp),
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = Color(red = 13, green = 61, blue = 3),
             unfocusedBorderColor = Color(red = 13, green = 61, blue = 3)
@@ -610,10 +583,10 @@ fun PasswordTextFieldTemplate(
         onValueChange = valueUpdate,
         placeholder = {
             Text(
-                text = textFieldLabel
+                text = textFieldLabel,
+                fontSize = 15.sp
             )
         },
-
         leadingIcon = {
             Icon(
                 imageVector = leadingIcon,
@@ -621,7 +594,7 @@ fun PasswordTextFieldTemplate(
                 tint = Color(0xFF0D3D03)
             )
         },
-
+        textStyle = TextStyle(fontSize = 15.sp),
         trailingIcon = {
             IconButton(onClick = { passwordVisible = !passwordVisible }) {
                 Icon(
@@ -651,16 +624,5 @@ fun PasswordTextFieldTemplate(
             focusedBorderColor = Color(0xFF0D3D03),
             unfocusedBorderColor = Color(0xFF0D3D03)
         )
-    )
-}
-
-@Composable
-fun PNCLogoWithNameTemplate(
-    modifier: Modifier = Modifier
-) {
-    Image(
-        modifier = modifier,
-        painter = painterResource(R.drawable.pnclogowithname),
-        contentDescription = "PNC Logo with Name"
     )
 }

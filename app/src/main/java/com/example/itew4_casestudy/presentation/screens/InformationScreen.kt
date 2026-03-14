@@ -1,5 +1,6 @@
 package com.example.itew4_casestudy.presentation.screens
 
+import android.content.Context
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -28,18 +29,27 @@ fun InformationScreen(navController: NavController) {
         drawerState = drawerState,
         drawerContent = {
             BurgerStackMenuLayout(
-
                 onSettingsClick = {
                     scope.launch {
                         drawerState.close()
                     }
                     navController.navigate(Routes.SETTINGS_SCREEN)
                 },
-
                 onLogoutClick = {
+                    val context = navController.context
+                    val sharedPrefs = context.getSharedPreferences(
+                        "user_session",
+                        Context.MODE_PRIVATE
+                    )
+
+                    sharedPrefs.edit()
+                        .putBoolean("is_logged_in", false)
+                        .apply()
+
                     scope.launch {
                         drawerState.close()
                     }
+
                     navController.navigate(Routes.LOGIN_SCREEN) {
                         popUpTo(0) { inclusive = true }
                         launchSingleTop = true
@@ -79,7 +89,7 @@ fun InformationScreen(navController: NavController) {
                         CircleLayout(
                             modifier = Modifier
                                 .padding(top = 10.dp, bottom = 5.dp)
-                                .size(220.dp)
+                                .size(200.dp)
                                 .shadow(
                                     elevation = 10.dp,
                                     shape = CircleShape,
@@ -115,10 +125,12 @@ fun InformationScreen(navController: NavController) {
                                     verticalArrangement = Arrangement.Center,
                                     horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
-                                    PNCLogoWithNameTemplate(
+                                    Image(
                                         modifier = Modifier
                                             .fillMaxWidth(.95f)
-                                            .padding(top = 20.dp)
+                                            .padding(top = 20.dp),
+                                        painter = painterResource(R.drawable.pnclogowithname),
+                                        contentDescription = "PNC Logo with Name"
                                     )
 
                                     HorizontalDivider(
@@ -243,7 +255,7 @@ fun InformationScreen(navController: NavController) {
 
                                     HorizontalDivider(
                                         modifier = Modifier
-                                            .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
+                                            .padding(start = 20.dp, end = 20.dp, top = 15.dp, bottom = 10.dp),
                                         thickness = 5.dp,
                                         color = Color(red = 13, green = 61, blue = 3)
                                     )
@@ -358,80 +370,70 @@ fun InformationScreen(navController: NavController) {
                                         cardTemplateModifier = Modifier
                                             .fillMaxWidth()
                                             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp),
-                                        text = "Office of the University Secretary / Board Secretary",
-                                        fontSize = 17.sp
+                                        text = "Office of the University Secretary / Board Secretary"
                                     )
 
                                     OfficeBarLayout(
                                         cardTemplateModifier = Modifier
                                             .fillMaxWidth()
                                             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp),
-                                        text = "Management Information Systems Department",
-                                        fontSize = 17.sp
+                                        text = "Management Information Systems Department"
                                     )
 
                                     OfficeBarLayout(
                                         cardTemplateModifier = Modifier
                                             .fillMaxWidth()
                                             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp),
-                                        text = "Data Protection Department",
-                                        fontSize = 17.sp
+                                        text = "Data Protection Department"
                                     )
 
                                     OfficeBarLayout(
                                         cardTemplateModifier = Modifier
                                             .fillMaxWidth()
                                             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp),
-                                        text = "Office of the University Registrar",
-                                        fontSize = 17.sp
+                                        text = "Office of the University Registrar"
                                     )
 
                                     OfficeBarLayout(
                                         cardTemplateModifier = Modifier
                                             .fillMaxWidth()
                                             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp),
-                                        text = "Office of the University Library",
-                                        fontSize = 17.sp
+                                        text = "Office of the University Library"
                                     )
 
                                     OfficeBarLayout(
                                         cardTemplateModifier = Modifier
                                             .fillMaxWidth()
                                             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp),
-                                        text = "Student Affairs and Services Department",
-                                        fontSize = 17.sp
+                                        text = "Student Affairs and Services Department"
                                     )
 
                                     OfficeBarLayout(
                                         cardTemplateModifier = Modifier
                                             .fillMaxWidth()
                                             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp),
-                                        text = "Guidance and Counseling Department",
-                                        fontSize = 17.sp
+                                        text = "Guidance and Counseling Department"
                                     )
 
                                     OfficeBarLayout(
                                         cardTemplateModifier = Modifier
                                             .fillMaxWidth()
                                             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp),
-                                        text = "Admissions Department",
-                                        fontSize = 17.sp
+                                        text = "Admissions Department"
                                     )
 
                                     OfficeBarLayout(
                                         cardTemplateModifier = Modifier
                                             .fillMaxWidth()
                                             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp),
-                                        text = "Placement, Alumni, and Linkage Department",
-                                        fontSize = 17.sp
+                                        text = "Placement, Alumni, and Linkage Department"
                                     )
 
                                     OfficeBarLayout(
                                         cardTemplateModifier = Modifier
                                             .fillMaxWidth()
                                             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 20.dp),
-                                        text = "Gender and Development Department",
-                                        fontSize = 17.sp
+                                        text = "Gender and Development Department"
                                     )
                                 }
                             }
