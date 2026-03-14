@@ -13,7 +13,7 @@ interface TaskDao {
     suspend fun insertTask(task: TaskEntity)
 
     @Update
-    suspend fun updateTask(task: TaskEadd query to fetch all tasks ordered by due datentity)
+    suspend fun updateTask(task: TaskEntity)
 
     @Delete
     suspend fun deleteTask(task: TaskEntity)
