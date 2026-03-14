@@ -12,5 +12,12 @@ interface TaskDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTask(task: TaskEntity)
 
-}
+    @Update
+    suspend fun updateTask(task: TaskEadd query to fetch all tasks ordered by due datentity)
 
+    @Delete
+    suspend fun deleteTask(task: TaskEntity)
+
+    @Query("SELECT * FROM tasks ORDER BY dueDateMillis ASC")
+    suspend fun getAllTasks(): List<TaskEntity>
+}
