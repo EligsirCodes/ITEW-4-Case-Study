@@ -1,9 +1,12 @@
 package com.example.itew4_casestudy.data.repository
 
 import com.example.itew4_casestudy.data.local.TaskDao
+import com.example.itew4_casestudy.data.local.TaskEntity
 
 class TaskRepository(
     private val taskDao: TaskDao
 ) {
-
+    suspend fun insertTask(task: TaskEntity) {
+        taskDao.insertTask(task)
+    }
 }
