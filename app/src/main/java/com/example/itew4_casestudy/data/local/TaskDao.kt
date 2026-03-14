@@ -15,5 +15,9 @@ interface TaskDao {
     @Update
     suspend fun updateTask(task: TaskEntity)
 
+    @Delete
+    suspend fun deleteTask(task: TaskEntity)
 
+    @Query("SELECT * FROM tasks ORDER BY dueDateMillis ASC")
+    suspend fun getAllTasks(): List<TaskEntity>
 }
