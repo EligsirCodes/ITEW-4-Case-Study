@@ -6,13 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [AnnouncementEntity::class],
-    version = 1,
+    entities = [AnnouncementEntity::class, TaskEntity::class],
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun announcementDao(): AnnouncementDao
+    abstract fun taskDao(): TaskDao
 
     companion object {
         @Volatile
@@ -24,7 +25,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "pnc_buddy_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }
