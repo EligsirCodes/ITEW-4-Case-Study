@@ -128,9 +128,21 @@ fun LoginScreen(navController: NavController) {
                 if (userName == "q" && password == "q") {
                     sharedPrefs.edit()
                         .putBoolean("is_logged_in", true)
+                        .putString("identifier", "1")
                         .apply()
 
-                    navController.navigate(Routes.DASHBOARD_SCREEN) {
+                    navController.navigate("dashboard_screen/1") {
+                        popUpTo(Routes.LOGIN_SCREEN) {
+                            inclusive = true
+                        }
+                    }
+                } else if (userName == "admin" && password == "admin") {
+                    sharedPrefs.edit()
+                        .putBoolean("is_logged_in", true)
+                        .putString("identifier", "2")
+                        .apply()
+
+                    navController.navigate("dashboard_screen/2") {
                         popUpTo(Routes.LOGIN_SCREEN) {
                             inclusive = true
                         }

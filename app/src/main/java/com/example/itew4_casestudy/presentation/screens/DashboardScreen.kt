@@ -21,7 +21,7 @@ import com.example.itew4_casestudy.navigation.Routes
 import kotlinx.coroutines.launch
 
 @Composable
-fun DashboardScreen(navController: NavController) {
+fun DashboardScreen(navController: NavController, identifier: String) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
@@ -108,7 +108,7 @@ fun DashboardScreen(navController: NavController) {
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 EmboldenedTextTemplate(
-                                    text = "J",
+                                    text = if (identifier == "1") "J" else "A",
                                     fontSize = 30.sp
                                 )
                             }
@@ -126,7 +126,7 @@ fun DashboardScreen(navController: NavController) {
                     EmboldenedTextTemplate(
                         modifier = Modifier
                             .padding(top = 5.dp),
-                        text = "John Doe",
+                        text = if (identifier == "1") "John Doe" else "Admin",
                         textAlign = TextAlign.Center,
                         fontSize = 25.sp
                     )

@@ -23,11 +23,12 @@ fun AppNavHost(navController: NavHostController) {
     )
 
     val isLoggedIn = sharedPrefs.getBoolean("is_logged_in", false)
+    val identifier = sharedPrefs.getString("identifier", "1") ?: "1"
 
     NavHost(
         navController = navController,
         startDestination = if (isLoggedIn)
-            Routes.DASHBOARD_SCREEN
+            "dashboard_screen/$identifier"
         else
             Routes.LOGIN_SCREEN
     ) {
@@ -39,8 +40,16 @@ fun AppNavHost(navController: NavHostController) {
             RegistrationScreen(navController)
         }
 
-        composable(Routes.DASHBOARD_SCREEN) {
-            DashboardScreen(navController)
+        composable(
+            route = Routes.DASHBOARD_SCREEN,
+            arguments = listOf(
+                androidx.navigation.navArgument("identifier") {
+                    type = androidx.navigation.NavType.StringType
+                }
+            )
+        ) { backStackEntry ->
+            val identifierD = backStackEntry.arguments?.getString("identifier") ?: "1"
+            DashboardScreen(navController, identifierD)
         }
 
         composable(Routes.INFORMATION_SCREEN) {

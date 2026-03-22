@@ -42,6 +42,15 @@ class AnnouncementViewModel(
         }
     }
 
+    fun addAnnouncement(title: String, content: String) {
+        viewModelScope.launch {
+            repository.insertAnnouncement(
+                AnnouncementEntity(title = title, content = content)
+            )
+            loadAnnouncements()
+        }
+    }
+
     fun markAsRead(id: Int) {
         viewModelScope.launch {
             repository.markAsRead(id)
