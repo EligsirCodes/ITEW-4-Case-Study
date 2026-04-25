@@ -90,4 +90,11 @@ class TaskViewModel(
             repository.updateTask(task.copy(isCompleted = true))
         }
     }
+
+    fun deleteTask(context: Context, task: TaskModel) {
+        viewModelScope.launch {
+            TaskScheduler.cancelNotification(context, task)
+            repository.deleteTask(task.id)
+        }
+    }
 }
