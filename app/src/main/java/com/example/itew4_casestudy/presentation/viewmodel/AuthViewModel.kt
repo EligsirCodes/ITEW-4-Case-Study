@@ -44,5 +44,15 @@ class AuthViewModel(
             return
         }
 
+        _registrationState.value = RegistrationState.Loading
+
+        viewModelScope.launch {
+            val result = repository.registerUser(email, password, name, role)
+            _registrationState.value = when (result) {
+                is AuthRepository.AuthResult.Success -> RegistrationState.Success
+                is AuthRepository.AuthResult.Error -> RegistrationState.Error(result.message)
+            }
+        }
     }
+
 }
