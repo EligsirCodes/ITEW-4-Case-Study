@@ -12,5 +12,4 @@ class ThemeViewModel(application: Application) : AndroidViewModel(application) {
     private val _isDarkMode = MutableStateFlow(sharedPrefs.getBoolean("dark_mode", false))
     val isDarkMode: StateFlow<Boolean> = _isDarkMode.asStateFlow()
 
-    }
 }
