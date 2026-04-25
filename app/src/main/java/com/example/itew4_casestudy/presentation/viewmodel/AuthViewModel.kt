@@ -1,2 +1,13 @@
 package com.example.itew4_casestudy.presentation.viewmodel
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.itew4_casestudy.data.repository.AuthRepository
+
+
+sealed class RegistrationState {
+    object Idle : RegistrationState()
+    object Loading : RegistrationState()
+    object Success : RegistrationState()
+    data class Error(val message: String) : RegistrationState()
+}
