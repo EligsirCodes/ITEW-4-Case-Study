@@ -97,4 +97,9 @@ class TaskViewModel(
             repository.deleteTask(task.id)
         }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        snapshotListener?.remove()
+    }
 }
