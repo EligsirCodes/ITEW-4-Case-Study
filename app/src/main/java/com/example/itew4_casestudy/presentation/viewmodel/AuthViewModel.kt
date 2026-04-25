@@ -55,4 +55,25 @@ class AuthViewModel(
         }
     }
 
+    fun login(email: String, password: String) {
+        if (email.isBlank() || password.isBlank()) {
+            _loginState.value = LoginState.Error("Please enter email and password.")
+            return
+        }
+
+        _loginState.value = LoginState.Loading
+
+        viewModelScope.launch {
+            val result = repository.loginUser(email, password)
+            _loginState.value = when (result) {
+                is AuthRepository.AuthResult.Success -> {
+                    LoginState.Success(result.role ?: "Student")
+                }
+                is AuthRepository.AuthResult.Error -> {
+                    LoginState.Error(result.message)
+                }
+            }
+        }
+    }
+
 }
