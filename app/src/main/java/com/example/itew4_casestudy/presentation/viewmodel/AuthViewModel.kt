@@ -32,4 +32,17 @@ class AuthViewModel(
     private val _loginState = MutableStateFlow<LoginState>(LoginState.Idle)
     val loginState: StateFlow<LoginState> = _loginState.asStateFlow()
 
+    fun register(email: String, password: String, name: String, role: String) {
+        if (email.isBlank() || password.isBlank() || name.isBlank()) {
+            _registrationState.value = RegistrationState.Error("All fields must be filled.")
+            return
+        }
+
+        if (password.length < 6) {
+            _registrationState.value =
+                RegistrationState.Error("Password must be at least 6 characters.")
+            return
+        }
+
+    }
 }
