@@ -11,15 +11,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.*
 import androidx.navigation.NavController
 import com.example.itew4_casestudy.navigation.Routes
+import com.example.itew4_casestudy.presentation.viewmodel.ThemeViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun SettingsScreen(navController: NavController) {
+fun SettingsScreen(navController: NavController, themeViewModel: ThemeViewModel) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
-    var isDarkMode by remember { mutableStateOf(false) }
-    var isNotificationsOn by remember { mutableStateOf(false) }
+    val isDarkMode by themeViewModel.isDarkMode.collectAsState()
+    val isNotificationsOn by themeViewModel.isNotificationsEnabled.collectAsState()
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -93,7 +94,7 @@ fun SettingsScreen(navController: NavController) {
                                 .size(40.dp),
                             imageVector = Icons.Filled.Settings,
                             contentDescription = "Settings Icon",
-                            tint = Color(red = 13, green = 61, blue = 3)
+                            tint = MaterialTheme.colorScheme.primary
                         )
 
                         EmboldenedTextTemplate(
@@ -107,14 +108,14 @@ fun SettingsScreen(navController: NavController) {
                         modifier = Modifier
                             .padding(10.dp),
                         thickness = 3.dp,
-                        color = Color(red = 13, green = 61, blue = 3)
+                        color = MaterialTheme.colorScheme.primary
                     )
 
                     CardTemplate(
                         modifier = Modifier
                             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp),
                         colors = CardDefaults.cardColors(
-                            containerColor = Color(red = 179, green = 204, blue = 175)
+                            containerColor = MaterialTheme.colorScheme.surface
                         ),
                         innerComposable = {
                             Row(
@@ -134,14 +135,14 @@ fun SettingsScreen(navController: NavController) {
                                     modifier = Modifier
                                         .padding(end = 20.dp),
                                     checked = isDarkMode,
-                                    onCheckedChange = { isDarkMode = it },
+                                    onCheckedChange = { themeViewModel.toggleDarkMode(it) },
                                     colors = SwitchDefaults.colors(
                                         checkedThumbColor = Color.White,
-                                        checkedTrackColor = Color(red = 13, green = 61, blue = 3),
-                                        uncheckedThumbColor = Color(red = 13, green = 61, blue = 3),
-                                        uncheckedTrackColor = Color.White,
+                                        checkedTrackColor = MaterialTheme.colorScheme.primary,
+                                        uncheckedThumbColor = MaterialTheme.colorScheme.primary,
+                                        uncheckedTrackColor = MaterialTheme.colorScheme.background,
                                         checkedBorderColor = Color.White,
-                                        uncheckedBorderColor = Color(red = 13, green = 61, blue = 3)
+                                        uncheckedBorderColor = MaterialTheme.colorScheme.primary
                                     )
                                 )
                             }
@@ -152,7 +153,7 @@ fun SettingsScreen(navController: NavController) {
                         modifier = Modifier
                             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp),
                         colors = CardDefaults.cardColors(
-                            containerColor = Color(red = 179, green = 204, blue = 175)
+                            containerColor = MaterialTheme.colorScheme.surface
                         ),
                         innerComposable = {
                             Row(
@@ -172,14 +173,14 @@ fun SettingsScreen(navController: NavController) {
                                     modifier = Modifier
                                         .padding(end = 20.dp),
                                     checked = isNotificationsOn,
-                                    onCheckedChange = { isNotificationsOn = it },
+                                    onCheckedChange = { themeViewModel.toggleNotifications(it) },
                                     colors = SwitchDefaults.colors(
                                         checkedThumbColor = Color.White,
-                                        checkedTrackColor = Color(red = 13, green = 61, blue = 3),
-                                        uncheckedThumbColor = Color(red = 13, green = 61, blue = 3),
-                                        uncheckedTrackColor = Color.White,
+                                        checkedTrackColor = MaterialTheme.colorScheme.primary,
+                                        uncheckedThumbColor = MaterialTheme.colorScheme.primary,
+                                        uncheckedTrackColor = MaterialTheme.colorScheme.background,
                                         checkedBorderColor = Color.White,
-                                        uncheckedBorderColor = Color(red = 13, green = 61, blue = 3)
+                                        uncheckedBorderColor = MaterialTheme.colorScheme.primary
                                     )
                                 )
                             }
