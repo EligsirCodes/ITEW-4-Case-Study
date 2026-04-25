@@ -3,6 +3,10 @@ package com.example.itew4_casestudy.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.itew4_casestudy.data.repository.AuthRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
 
 sealed class RegistrationState {
@@ -21,4 +25,8 @@ sealed class LoginState {
 
 class AuthViewModel(
     private val repository: AuthRepository = AuthRepository()
-) : ViewModel() {}
+) : ViewModel() {
+    private val _registrationState = MutableStateFlow<RegistrationState>(RegistrationState.Idle)
+    val registrationState: StateFlow<RegistrationState> = _registrationState.asStateFlow()
+
+}
