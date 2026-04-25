@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-
 sealed class RegistrationState {
     object Idle : RegistrationState()
     object Loading : RegistrationState()
@@ -39,8 +38,7 @@ class AuthViewModel(
         }
 
         if (password.length < 6) {
-            _registrationState.value =
-                RegistrationState.Error("Password must be at least 6 characters.")
+            _registrationState.value = RegistrationState.Error("Password must be at least 6 characters.")
             return
         }
 
@@ -76,4 +74,11 @@ class AuthViewModel(
         }
     }
 
+    fun resetState() {
+        _registrationState.value = RegistrationState.Idle
+    }
+
+    fun resetLoginState() {
+        _loginState.value = LoginState.Idle
+    }
 }
