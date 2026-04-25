@@ -1,18 +1,18 @@
 package com.example.itew4_casestudy.presentation.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.example.itew4_casestudy.domain.model.TaskModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.itew4_casestudy.data.repository.TaskRepository
+import com.example.itew4_casestudy.domain.model.TaskModel
+import com.example.itew4_casestudy.presentation.notifications.TaskScheduler
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
-import android.content.Context
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import com.example.itew4_casestudy.presentation.notifications.TaskScheduler
 
 class TaskViewModel(
     private val repository: TaskRepository = TaskRepository()
@@ -47,7 +47,9 @@ class TaskViewModel(
             .whereEqualTo("userId", uid)
             .orderBy("dueDateMillis", Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, error ->
-                if (error != null) return@addSnapshotListener
+                if (error != null) {
+                    return@addSnapshotListener
+                }
 
                 if (snapshot != null) {
                     val fetchedTasks = snapshot.documents.mapNotNull { doc ->
