@@ -74,6 +74,15 @@ class AuthViewModel(
                 }
             }
         }
+
+        fun resetState() {
+            _registrationState.value = RegistrationState.Idle
+        }
+
+        fun resetLoginState() {
+            _loginState.value = LoginState.Idle
+        }
     }
+
 
 }
