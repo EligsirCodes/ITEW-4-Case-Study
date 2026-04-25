@@ -19,5 +19,8 @@ class ThemeViewModel(application: Application) : AndroidViewModel(application) {
         sharedPrefs.edit().putBoolean("dark_mode", isEnabled).apply()
     }
 
-
+    fun toggleNotifications(isEnabled: Boolean) {
+        _isNotificationsEnabled.value = isEnabled
+        sharedPrefs.edit().putBoolean("notifications_enabled", isEnabled).apply()
+    }
 }
