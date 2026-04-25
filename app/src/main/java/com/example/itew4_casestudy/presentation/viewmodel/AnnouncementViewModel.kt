@@ -22,6 +22,10 @@ class AnnouncementViewModel(
     private val currentUserId: String
         get() = FirebaseAuth.getInstance().currentUser?.uid ?: ""
 
+    init {
+        listenToAnnouncements()
+    }
+
     fun setFilter(filter: AnnouncementFilter) {
         currentFilter = filter
         applyFilter()
