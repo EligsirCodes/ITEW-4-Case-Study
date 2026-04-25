@@ -4,6 +4,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.example.itew4_casestudy.data.repository.AnnouncementRepository
+import com.example.itew4_casestudy.domain.model.AnnouncementModel
 import com.google.firebase.auth.FirebaseAuth
 
 enum class AnnouncementFilter { ALL, READ, UNREAD }
