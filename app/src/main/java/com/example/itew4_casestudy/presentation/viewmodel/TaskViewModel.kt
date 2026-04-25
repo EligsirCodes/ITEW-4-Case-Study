@@ -76,4 +76,11 @@ class TaskViewModel(
             }
         }
     }
+
+    fun updateTask(context: Context, task: TaskModel) {
+        viewModelScope.launch {
+            repository.updateTask(task)
+            TaskScheduler.scheduleNotification(context, task)
+        }
+    }
 }
