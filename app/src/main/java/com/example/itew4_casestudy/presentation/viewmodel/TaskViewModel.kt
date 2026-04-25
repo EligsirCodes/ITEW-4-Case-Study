@@ -44,6 +44,13 @@ class TaskViewModel(
             .orderBy("dueDateMillis", Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) return@addSnapshotListener
+
+                if (snapshot != null) {
+                    val fetchedTasks = snapshot.documents.mapNotNull { doc ->
+                        doc.toObject(TaskModel::class.java)
+                    }
+                    tasks = fetchedTasks.toList()
+                }
             }
     }
 }
