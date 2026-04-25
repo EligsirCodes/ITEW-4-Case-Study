@@ -83,4 +83,11 @@ class TaskViewModel(
             TaskScheduler.scheduleNotification(context, task)
         }
     }
+
+    fun markAsDone(context: Context, task: TaskModel) {
+        viewModelScope.launch {
+            TaskScheduler.cancelNotification(context, task)
+            repository.updateTask(task.copy(isCompleted = true))
+        }
+    }
 }
