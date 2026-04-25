@@ -18,3 +18,7 @@ sealed class LoginState {
     data class Success(val role: String) : LoginState()
     data class Error(val message: String) : LoginState()
 }
+
+class AuthViewModel(
+    private val repository: AuthRepository = AuthRepository()
+) : ViewModel() {}
