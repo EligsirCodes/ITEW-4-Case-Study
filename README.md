@@ -21,6 +21,121 @@ The Smart Campus Companion will be developed over **three periods**, with each p
 * Continuous enhancement of code quality
 * Refinement of user experience and interface design
 
+---
+
+## 🗓️ Phase 2: Feature Expansion & MVVM (Midterm)
+
+### Goal
+
+Introduce dynamic features and proper app architecture using the MVVM pattern, local data persistence via Room Database, and expanded UI components.
+
+---
+
+### ✅ Functional Requirements
+
+#### 1. Task & Schedule Manager
+- Add, edit, and delete tasks
+- Date & time picker support
+- Display task list using RecyclerView / LazyColumn
+
+#### 2. Campus Announcements Module
+- Stored using Room Database
+- Mark announcements as read / unread
+- Filter announcements by read status
+
+#### 3. Local Data Persistence
+- Room Database integration
+- DAO, Entity, and ViewModel implementation
+
+---
+
+### 🏗️ Technical Focus
+
+- **MVVM Architecture** – Separation of UI, business logic, and data layers
+- **ViewModel & LiveData / StateFlow** – Reactive UI state management
+- **Room Database** – Persistent local storage with DAO and Entity definitions
+- **RecyclerView Patterns** – Efficient list rendering for tasks and announcements
+- **Jetpack Compose** – Modern declarative UI toolkit
+- **Kotlin Coroutines** – Asynchronous data operations
+
+---
+
+### 🌿 Git Requirements (Midterm)
+
+- Feature branches used:
+    - `feature/task-manager`
+    - `feature/announcements`
+- Pull Requests required for all feature merges
+- At least **1 documented merge conflict**
+- Release tagged: **`v1.0-midterm`**
+
+---
+
+### 📦 Midterm Deliverables
+
+- ✅ Updated repository with all Phase 2 features
+- ✅ Architecture diagram
+- ✅ Reflection document (Git challenges & conflict resolution — see below)
+
+---
+
+### 📝 Midterm Reflection
+
+#### Git Challenges
+
+During Phase 2, the team worked across multiple feature branches simultaneously, which introduced several real-world Git coordination challenges:
+
+- **Parallel development on `feature/task-manager` and `feature/announcements`** required careful branch management to avoid overwriting each other's work.
+- **Database schema evolution** — as `AppDatabase` was updated incrementally (adding `TaskEntity`, `AnnouncementEntity`, DAOs, and repositories), keeping branches in sync became challenging, especially when multiple developers were modifying related files.
+- **Iterative DAO refinements** required multiple rounds of commits (e.g., the `AnnouncementDao` had methods added and removed across commits to unify the update concept), which led to back-and-forth changes that needed careful merging.
+- **Gradle dependency updates** (Kotlin, Compose, Room, Coroutines, Navigation) touched the build configuration shared across branches, which was a common source of merge friction.
+
+#### Conflict Resolution
+
+The team encountered and resolved at least one documented merge conflict during the integration of feature branches into `develop` and subsequently into `master`. The conflict arose when merging `feature/announcements` back into `develop` after `feature/task-manager` had already introduced changes to `AppDatabase`. The following steps were taken:
+
+1. Identified conflicted files using `git status`
+2. Manually resolved conflicts in `AppDatabase` by retaining both `TaskEntity` and `AnnouncementEntity` registrations
+3. Verified the resolved file compiled and ran correctly before staging
+4. Marked conflicts as resolved with `git add` and completed the merge commit
+
+The team also documented a case in `AnnouncementDao` where methods were removed and later restored across commits — reflecting an iterative design decision that was clarified through team discussion before finalizing the DAO interface.
+
+---
+
+### 🔖 Midterm Commit History (Selected)
+
+| Commit Message | Description |
+|---|---|
+| `Deployment of Announcement and Tasks Feature to Master Branch` | Final merge to master for midterm release |
+| `Merge pull request #6 from EligsirCodes/feature/task-manager` | PR merge of task manager feature |
+| `Midterm: TaskDao and Repository Fixes` | Bug fixes on DAO and repository layer |
+| `Midterm: AnnouncementsScreen UI Update` | Updated Announcements UI via Jetpack Compose |
+| `Midterm: TasksScreen UI Update` | Updated Tasks UI via Jetpack Compose |
+| `Midterm: TaskViewModel and ViewModelFactory Implementation` | Introduced ViewModel and Factory for tasks |
+| `Add update methods for tasks` | Extended task CRUD operations |
+| `add query to fetch all tasks ordered by due date` | Sorted task retrieval from Room |
+| `Add TaskDao interface` | Defined DAO for task operations |
+| `Add getAllTasks / insertTask / updateTask / deleteTask functions` | Full CRUD implementation for tasks |
+| `Create TaskRepository for task data operations` | Repository pattern for task data access |
+| `Midterm: TaskEntity Implementation` | Defined Room entity for tasks |
+| `Midterm: AppDatabase Update` | Added entities to the Room database |
+| `Merge pull request #5 from EligsirCodes/feature/announcements` | PR merge of announcements feature |
+| `Merge pull request #4 from EligsirCodes/feature/task-manager` | Earlier PR merge (initial task manager) |
+| `Midterm: ViewModel and AnnouncementsScreen Updates` | ViewModel integration with announcements UI |
+| `Midterm: App Database Implementation` | Initial Room database setup |
+| `Merge remote-tracking branch 'origin/feature/announcements' into develop` | Remote merge — conflict resolution point |
+| `Set up for function markAsRead and updateAnnouncement` | Read-status management for announcements |
+| `Set up for function getUnreadAnnouncements / getReadAnnouncements / getAllAnnouncement` | Query functions for filtering announcements |
+| `Step function AnnouncementRepository and intent insertAnnouncement` | Repository and insert setup |
+| `Restore unread, mark-as-read, and update methods in AnnouncementDao` | Reverted to consistent update handling after review |
+| `Remove unread, mark-as-read, and update methods from AnnouncementDao` | Temporary simplification during iteration |
+| `Add Room DAO AnnouncementDao` | Initial DAO with insert, query, update, mark-as-read |
+| `Add Room entity AnnouncementEntity` | Defined Room entity for announcements |
+| `Midterm: Gradle Update` | Dependency configuration for Compose, Room, Coroutines, Navigation |
+
+---
+
 ## Team Roles
 
 The project is developed collaboratively with the following team members:
@@ -30,6 +145,8 @@ The project is developed collaboratively with the following team members:
 * **Senior UI/UX Design:** John Lester Penafiel
 * **Feature Developer:** Trisha Ann Rabano
 * **Git Manager:** Marc Alvin Quitorio
+
+---
 
 # Git Workflow
 
@@ -254,15 +371,15 @@ When you encounter merge conflicts:
 ## 📊 Workflow Diagram
 
 ```
-master  ──●────────────────────────●────────────●──→
-           ↑                        ↑            ↑
-           │                        │            │
-develop ───●──●──●──●──●──●──●──●──●────●──●───●──→
-              ↑     ↑        ↑              ↑
-              │     │        │              │
-feature/1  ───●─────●        │              │
-                             │              │
-feature/2  ──────────────────●──────────────●
+master  ──●──────────────────────────────────────────●──→
+           ↑                                          ↑
+           │                                          │ (v1.0-midterm)
+develop ───●──●──●──●──●──●──●──●──●──●──●──●──●────●──→
+              ↑              ↑              ↑
+              │              │              │
+feature/announcements ───────●──────────────●
+                                            │
+feature/task-manager  ───────────●──────────●
 
 Legend:
 ● = Commit/Merge point
@@ -305,4 +422,6 @@ If you encounter issues:
 - [Git Cheat Sheet](https://education.github.com/git-cheat-sheet-education.pdf)
 - [Atlassian Git Tutorials](https://www.atlassian.com/git/tutorials)
 
-#### NOTE: This Serves as our Official Documentation of the Group according on what is provided.
+---
+
+#### NOTE: This serves as the Official Documentation of the Group according to what is provided.

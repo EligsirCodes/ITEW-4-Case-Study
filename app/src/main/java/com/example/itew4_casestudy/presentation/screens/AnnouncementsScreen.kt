@@ -11,7 +11,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
 import androidx.navigation.NavController
@@ -38,6 +40,14 @@ fun AnnouncementsScreen(navController: NavController) {
     }
     val viewModel: com.example.itew4_casestudy.presentation.viewmodel.AnnouncementViewModel =
         androidx.lifecycle.viewmodel.compose.viewModel(factory = factory)
+
+    var showAddDialog by remember { mutableStateOf(false) }
+    var newAnnouncementTitle by remember { mutableStateOf("") }
+    var newAnnouncementContent by remember { mutableStateOf("") }
+
+    val contextL = LocalContext.current
+    val prefs = contextL.getSharedPreferences("user_session", Context.MODE_PRIVATE)
+    val identifier = remember { prefs.getString("identifier", "1") ?: "1" }
 
     LaunchedEffect(Unit) {
         viewModel.baseAnnouncements()
@@ -130,6 +140,20 @@ fun AnnouncementsScreen(navController: NavController) {
                             .padding(10.dp),
                         thickness = 3.dp,
                         color = Color(red = 13, green = 61, blue = 3)
+                    )
+                }
+
+                if (identifier == "2") {
+                    ButtonTemplate(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 10.dp, end = 10.dp),
+                        onClick = {
+                            newAnnouncementTitle = ""
+                            newAnnouncementContent = ""
+                            showAddDialog = true
+                        },
+                        buttonText = "Post New Announcement"
                     )
                 }
 
@@ -286,6 +310,70 @@ fun AnnouncementsScreen(navController: NavController) {
                         )
                     }
                 }
+            }
+
+            if (showAddDialog) {
+                AlertDialog(
+                    onDismissRequest = {
+                        showAddDialog = false
+                    },
+                    title = {
+                        EmboldenedTextTemplate(
+                            text = "New Announcement"
+                        )
+                    },
+                    text = {
+                        Column {
+                            TextFieldTemplate(
+                                value = newAnnouncementTitle,
+                                valueUpdate = {
+                                    newAnnouncementTitle = it
+                                },
+                                textFieldLabel = "Announcement Title",
+                                icon = Icons.Filled.Title
+                            )
+
+                            Spacer(modifier = Modifier.height(10.dp))
+
+                            TextFieldTemplate(
+                                value = newAnnouncementContent,
+                                valueUpdate = {
+                                    newAnnouncementContent = it
+                                },
+                                textFieldLabel = "Announcement Description",
+                                icon = Icons.Filled.Description
+                            )
+                        }
+                    },
+                    confirmButton = {
+                        TextButton(
+                            onClick = {
+                                if (newAnnouncementTitle.isNotBlank()) {
+                                    viewModel.addAnnouncement(newAnnouncementTitle, newAnnouncementContent)
+                                    showAddDialog = false
+                                }
+                            }
+                        ) {
+                            Text(
+                                text = "Post",
+                                color = Color(red = 13, green = 61, blue = 3),
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(
+                            onClick = {
+                                showAddDialog = false
+                            }
+                        ) {
+                            Text(
+                                text = "Cancel",
+                                color = Color.Red
+                            )
+                        }
+                    }
+                )
             }
         }
     }
