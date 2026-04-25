@@ -42,7 +42,7 @@ fun TopBarLayout(
                         .size(30.dp),
                     imageVector = Icons.Filled.Menu,
                     contentDescription = "Menu Icon",
-                    tint = Color.White
+                    tint = MaterialTheme.colorScheme.onPrimary,
                 )
             }
         },
@@ -55,12 +55,12 @@ fun TopBarLayout(
             ) {
                 EmboldenedTextTemplate(
                     text = "PNC Buddy",
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onPrimary,
                 )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Color(red = 13, green = 61, blue = 3),
+            containerColor = MaterialTheme.colorScheme.primary,
             titleContentColor = Color.White
         )
     )
@@ -75,7 +75,7 @@ fun BottomBarLayout(
         modifier = Modifier
             .fillMaxWidth()
             .height(115.dp),
-        containerColor = Color(red = 13, green = 61, blue = 3)
+        containerColor = MaterialTheme.colorScheme.primary
     ) {
         NavigationBarItem(
             icon = {
@@ -84,7 +84,7 @@ fun BottomBarLayout(
                         .size(35.dp),
                     imageVector = if (selectionIdentifier == 1) Icons.Filled.Announcement else Icons.Outlined.Announcement,
                     contentDescription = "Announcement Icon",
-                    tint = Color(red = 179, green = 204, blue = 175)
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             },
             selected = false,
@@ -100,7 +100,7 @@ fun BottomBarLayout(
                         .size(35.dp),
                     imageVector = if (selectionIdentifier == 2) Icons.Filled.School else Icons.Outlined.School,
                     contentDescription = "Campus Info Icon",
-                    tint = Color(red = 179, green = 204, blue = 175)
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             },
             selected = false,
@@ -116,7 +116,7 @@ fun BottomBarLayout(
                         .size(35.dp),
                     imageVector = Icons.Outlined.Home,
                     contentDescription = "Home Icon",
-                    tint = Color(red = 179, green = 204, blue = 175)
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             },
             selected = false,
@@ -132,7 +132,7 @@ fun BottomBarLayout(
                         .size(35.dp),
                     imageVector = if (selectionIdentifier == 3) Icons.Filled.Task else Icons.Outlined.Task,
                     contentDescription = "Tasks Icon",
-                    tint = Color(red = 179, green = 204, blue = 175)
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             },
             selected = false,
@@ -148,7 +148,7 @@ fun BottomBarLayout(
                         .size(35.dp),
                     imageVector = if (selectionIdentifier == 4) Icons.Filled.Settings else Icons.Outlined.Settings,
                     contentDescription = "Settings Icon",
-                    tint = Color(red = 179, green = 204, blue = 175)
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             },
             selected = false,
@@ -168,7 +168,7 @@ fun BurgerStackMenuLayout(
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxWidth(0.7f)
-            .background(Color.White),
+            .background(MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -183,7 +183,7 @@ fun BurgerStackMenuLayout(
             modifier = Modifier
                 .padding(start = 15.dp, end = 15.dp, top = 10.dp, bottom = 10.dp),
             thickness = 3.dp,
-            color = Color(red = 13, green = 61, blue = 3)
+            color = MaterialTheme.colorScheme.primary
         )
 
         CardTemplate(
@@ -192,7 +192,7 @@ fun BurgerStackMenuLayout(
                 .padding(start = 15.dp, end = 15.dp, top = 5.dp, bottom = 5.dp),
             onClick = onSettingsClick,
             colors = CardDefaults.cardColors(
-                containerColor = Color(red = 13, green = 61, blue = 3)
+                containerColor = MaterialTheme.colorScheme.primary
             )
         ) {
             Row(
@@ -207,14 +207,14 @@ fun BurgerStackMenuLayout(
                         .size(25.dp),
                     imageVector = Icons.Filled.Settings,
                     contentDescription = "Settings Icon",
-                    tint = Color(red = 179, green = 204, blue = 175)
+                    tint = MaterialTheme.colorScheme.surface
                 )
 
                 EmboldenedTextTemplate(
                     text = "Settings",
                     textAlign = TextAlign.Center,
                     fontSize = 18.sp,
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             }
         }
@@ -225,7 +225,7 @@ fun BurgerStackMenuLayout(
                 .padding(start = 15.dp, end = 15.dp, top = 5.dp, bottom = 5.dp),
             onClick = onLogoutClick,
             colors = CardDefaults.cardColors(
-                containerColor = Color(red = 13, green = 61, blue = 3)
+                containerColor = MaterialTheme.colorScheme.primary
             )
         ) {
             Row(
@@ -240,14 +240,14 @@ fun BurgerStackMenuLayout(
                         .size(25.dp),
                     imageVector = Icons.Filled.ExitToApp,
                     contentDescription = "Log Out Icon",
-                    tint = Color(red = 179, green = 204, blue = 175)
+                    tint = MaterialTheme.colorScheme.surface
                 )
 
                 EmboldenedTextTemplate(
                     text = "Logout",
                     textAlign = TextAlign.Center,
                     fontSize = 18.sp,
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             }
         }
@@ -285,7 +285,7 @@ fun TextFieldLayout(
             text = layoutLabel,
             fontWeight = FontWeight.Bold,
             fontSize = 15.sp,
-            color = Color(red = 13, green = 61, blue = 3)
+            color = MaterialTheme.colorScheme.primary
         )
 
         innerComposable()
@@ -303,7 +303,7 @@ fun CourseBarLayout(
     CardTemplate(
         modifier = cardTemplateModifier,
         colors = CardDefaults.cardColors(
-            containerColor = Color(red = 13, green = 61, blue = 3)
+            containerColor = MaterialTheme.colorScheme.primary
         ),
         innerComposable = {
             Row(
@@ -322,7 +322,7 @@ fun CourseBarLayout(
                         )
                         .border(
                             width = 3.dp,
-                            color = Color(red = 179, green = 204, blue = 175),
+                            color = MaterialTheme.colorScheme.surface,
                             shape = CircleShape
                         )
                         .clip(CircleShape),
@@ -340,7 +340,7 @@ fun CourseBarLayout(
                     modifier = Modifier
                         .padding(end = 20.dp, top = 10.dp, bottom = 10.dp),
                     text = text,
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     textAlign = TextAlign.Center,
                     fontSize = fontSize
                 )
@@ -358,7 +358,7 @@ fun OfficeBarLayout(
     CardTemplate(
         modifier = cardTemplateModifier,
         colors = CardDefaults.cardColors(
-            containerColor = Color(red = 13, green = 61, blue = 3)
+            containerColor = MaterialTheme.colorScheme.primary
         ),
         innerComposable = {
             Row(
@@ -371,7 +371,7 @@ fun OfficeBarLayout(
                     modifier = Modifier
                         .padding(15.dp),
                     text = text,
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     textAlign = TextAlign.Center,
                     fontSize = fontSize
                 )
@@ -394,6 +394,7 @@ fun LogInOrSignUpLayout(
     ) {
         Text(
             text = initialText,
+            color = MaterialTheme.colorScheme.onBackground,
             fontSize = 15.sp
         )
 
@@ -404,7 +405,7 @@ fun LogInOrSignUpLayout(
                 ),
             text = highlightedText,
             fontWeight = FontWeight.Bold,
-            color = Color(red = 13, green = 61, blue = 3),
+            color = MaterialTheme.colorScheme.primary,
             fontSize = 15.sp
         )
     }
@@ -426,12 +427,12 @@ fun OptionLayout(
             modifier = modifier,
             imageVector = imageVector,
             contentDescription = "Option Icon",
-            tint = Color(red = 179, green = 204, blue = 175)
+            tint = MaterialTheme.colorScheme.onPrimary
         )
 
         Text(
             text = optionText,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onPrimary,
             fontWeight = FontWeight.SemiBold,
             fontSize = 18.sp
         )
@@ -445,7 +446,7 @@ fun EmboldenedTextTemplate(
     text: String,
     textAlign: TextAlign = TextAlign.Left,
     fontSize: TextUnit = 23.sp,
-    color: Color = Color(red = 13, green = 61, blue = 3)
+    color: Color = MaterialTheme.colorScheme.primary
 ) {
     Text(
         modifier = modifier,
@@ -463,7 +464,7 @@ fun NormalTextTemplate(
     text: String,
     textAlign: TextAlign = TextAlign.Left,
     fontSize: TextUnit = 18.sp,
-    color: Color = Color.Black
+    color: Color = MaterialTheme.colorScheme.onBackground
 ) {
     Text(
         modifier = modifier,
@@ -479,7 +480,7 @@ fun CardTemplate(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
     colors: CardColors = CardDefaults.cardColors(
-        containerColor = Color(red = 13, green = 61, blue = 3)
+        containerColor = MaterialTheme.colorScheme.primary
     ),
     innerComposable: @Composable () -> Unit
 ) {
@@ -516,8 +517,8 @@ fun ButtonTemplate(
         modifier = modifier,
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(red = 13, green = 61, blue = 3),
-            contentColor = Color.White
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary
         ),
         elevation = ButtonDefaults.buttonElevation(
             defaultElevation = 10.dp,
@@ -555,13 +556,13 @@ fun TextFieldTemplate(
             Icon(
                 imageVector = icon,
                 contentDescription = "TextField Icon",
-                tint = Color(0xFF0D3D03)
+                tint = MaterialTheme.colorScheme.primary
             )
         },
         textStyle = TextStyle(fontSize = 15.sp),
         colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = Color(red = 13, green = 61, blue = 3),
-            unfocusedBorderColor = Color(red = 13, green = 61, blue = 3)
+            focusedBorderColor = MaterialTheme.colorScheme.primary,
+            unfocusedBorderColor = MaterialTheme.colorScheme.primary
         )
     )
 }
@@ -591,7 +592,7 @@ fun PasswordTextFieldTemplate(
             Icon(
                 imageVector = leadingIcon,
                 contentDescription = "Password Icon",
-                tint = Color(0xFF0D3D03)
+                tint = MaterialTheme.colorScheme.primary
             )
         },
         textStyle = TextStyle(fontSize = 15.sp),
@@ -606,7 +607,7 @@ fun PasswordTextFieldTemplate(
                         "Hide Password"
                     else
                         "Show Password",
-                    tint = Color(0xFF0D3D03)
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         },
@@ -621,8 +622,8 @@ fun PasswordTextFieldTemplate(
         ),
 
         colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = Color(0xFF0D3D03),
-            unfocusedBorderColor = Color(0xFF0D3D03)
+            focusedBorderColor = MaterialTheme.colorScheme.primary,
+            unfocusedBorderColor = MaterialTheme.colorScheme.primary
         )
     )
 }

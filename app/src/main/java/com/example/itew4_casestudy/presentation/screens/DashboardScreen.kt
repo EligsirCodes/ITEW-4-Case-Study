@@ -3,7 +3,6 @@ package com.example.itew4_casestudy.presentation.screens
 import android.content.Context
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -13,17 +12,34 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
 import androidx.navigation.NavController
 import com.example.itew4_casestudy.navigation.Routes
+import com.example.itew4_casestudy.domain.model.UserModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 @Composable
 fun DashboardScreen(navController: NavController) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+
+    var userData by remember { mutableStateOf<UserModel?>(null) }
+
+    LaunchedEffect(Unit) {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        if (uid != null) {
+            val snapshot = FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(uid)
+                .get()
+                .await()
+            userData = snapshot.toObject(UserModel::class.java)
+        }
+    }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -36,6 +52,8 @@ fun DashboardScreen(navController: NavController) {
                     navController.navigate(Routes.SETTINGS_SCREEN)
                 },
                 onLogoutClick = {
+                    FirebaseAuth.getInstance().signOut()
+
                     val context = navController.context
                     val sharedPrefs = context.getSharedPreferences(
                         "user_session",
@@ -52,7 +70,6 @@ fun DashboardScreen(navController: NavController) {
 
                     navController.navigate(Routes.LOGIN_SCREEN) {
                         popUpTo(0) { inclusive = true }
-                        launchSingleTop = true
                     }
                 }
             )
@@ -95,7 +112,7 @@ fun DashboardScreen(navController: NavController) {
                             )
                             .border(
                                 width = 3.dp,
-                                color = Color(red = 13, green = 61, blue = 3),
+                                color = MaterialTheme.colorScheme.primary,
                                 shape = CircleShape
                             )
                             .clip(CircleShape),
@@ -103,12 +120,14 @@ fun DashboardScreen(navController: NavController) {
                             Column(
                                 modifier = Modifier
                                     .fillMaxSize()
-                                    .background(Color(red = 179, green = 204, blue = 175)),
+                                    .background(MaterialTheme.colorScheme.surface),
                                 verticalArrangement = Arrangement.Center,
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
+                                val displayInitial = userData?.name?.take(1)?.uppercase() ?: ""
+
                                 EmboldenedTextTemplate(
-                                    text = "J",
+                                    text = displayInitial,
                                     fontSize = 30.sp
                                 )
                             }
@@ -118,26 +137,28 @@ fun DashboardScreen(navController: NavController) {
                     NormalTextTemplate(
                         modifier = Modifier
                             .padding(bottom = 5.dp),
-                        text = "Dangal Greetings!",
+                        text = if (userData?.role == "Admin") {
+                            "Dangal Greetings Admin!"
+                        } else {
+                            "Dangal Greetings!"
+                        },
                         textAlign = TextAlign.Center,
                         fontSize = 20.sp
                     )
 
                     EmboldenedTextTemplate(
-                        modifier = Modifier
-                            .padding(top = 5.dp),
-                        text = "John Doe",
+                        modifier = Modifier.padding(top = 5.dp),
+                        text = userData?.name ?: "Loading...",
                         textAlign = TextAlign.Center,
                         fontSize = 25.sp
                     )
                 }
 
-
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 10.dp)
-                        .background(Color(red = 179, green = 204, blue = 175)),
+                        .background(MaterialTheme.colorScheme.surface),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {

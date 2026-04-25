@@ -11,7 +11,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.draw.*
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
@@ -97,7 +96,7 @@ fun InformationScreen(navController: NavController) {
                                 )
                                 .border(
                                     width = 5.dp,
-                                    color = Color(red = 13, green = 61, blue = 3),
+                                    color = MaterialTheme.colorScheme.primary,
                                     shape = CircleShape
                                 )
                                 .clip(CircleShape),
@@ -116,7 +115,7 @@ fun InformationScreen(navController: NavController) {
                                 .fillMaxWidth()
                                 .padding(10.dp),
                             colors = CardDefaults.cardColors(
-                                containerColor = Color(red = 179, green = 204, blue = 175)
+                                containerColor = MaterialTheme.colorScheme.surface
                             ),
                             innerComposable = {
                                 Column(
@@ -125,24 +124,9 @@ fun InformationScreen(navController: NavController) {
                                     verticalArrangement = Arrangement.Center,
                                     horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
-                                    Image(
-                                        modifier = Modifier
-                                            .fillMaxWidth(.95f)
-                                            .padding(top = 20.dp),
-                                        painter = painterResource(R.drawable.pnclogowithname),
-                                        contentDescription = "PNC Logo with Name"
-                                    )
-
-                                    HorizontalDivider(
-                                        modifier = Modifier
-                                            .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
-                                        thickness = 5.dp,
-                                        color = Color(red = 13, green = 61, blue = 3)
-                                    )
-
                                     NormalTextTemplate(
                                         modifier = Modifier
-                                            .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 10.dp),
+                                            .padding(start = 20.dp, end = 20.dp, top = 20.dp, bottom = 10.dp),
                                         text = "Pamantasan ng Cabuyao (PnC) is a public university located in Cabuyao City, Laguna, established in 2003 to provide accessible and affordable quality higher education to residents of the city. The university offers a range of undergraduate, senior high school, and technical-vocational programs designed to develop competent, skilled, and socially responsible graduates prepared for professional careers.",
                                         textAlign = TextAlign.Center,
                                         fontSize = 15.sp
@@ -153,7 +137,7 @@ fun InformationScreen(navController: NavController) {
                                             .fillMaxWidth()
                                             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 5.dp),
                                         colors = CardDefaults.cardColors(
-                                            containerColor = Color(red = 13, green = 61, blue = 3)
+                                            containerColor = MaterialTheme.colorScheme.primary
                                         ),
                                         innerComposable = {
                                             Column(
@@ -166,14 +150,14 @@ fun InformationScreen(navController: NavController) {
                                                     modifier = Modifier
                                                         .padding(start = 20.dp, end = 20.dp, top = 20.dp, bottom = 5.dp),
                                                     text = "Mission",
-                                                    color = Color.White
+                                                    color = MaterialTheme.colorScheme.onPrimary
                                                 )
 
                                                 NormalTextTemplate(
                                                     modifier = Modifier
                                                         .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 20.dp),
                                                     text = "As an institution of higher learning, UC(PnC) is committed to equip individuals with knowledge, skills, and values that will enable them to achieve their professional goals & provide leadership and service for national development.",
-                                                    color = Color.White,
+                                                    color = MaterialTheme.colorScheme.onPrimary,
                                                     textAlign = TextAlign.Center,
                                                     fontSize = 15.sp
                                                 )
@@ -186,7 +170,7 @@ fun InformationScreen(navController: NavController) {
                                             .fillMaxWidth()
                                             .padding(start = 10.dp, end = 10.dp, top = 5.dp, bottom = 20.dp),
                                         colors = CardDefaults.cardColors(
-                                            containerColor = Color(red = 13, green = 61, blue = 3)
+                                            containerColor = MaterialTheme.colorScheme.primary
                                         ),
                                         innerComposable = {
                                             Column(
@@ -199,14 +183,14 @@ fun InformationScreen(navController: NavController) {
                                                     modifier = Modifier
                                                         .padding(start = 20.dp, end = 20.dp, top = 20.dp, bottom = 5.dp),
                                                     text = "Vision",
-                                                    color = Color.White
+                                                    color = MaterialTheme.colorScheme.onPrimary
                                                 )
 
                                                 NormalTextTemplate(
                                                     modifier = Modifier
                                                         .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 20.dp),
                                                     text = "A premier institution of higher learning in Region IV, developing globally-competitive and value-laden professionals and leaders instrumental to community development and nation-building.",
-                                                    color = Color.White,
+                                                    color = MaterialTheme.colorScheme.onPrimary,
                                                     textAlign = TextAlign.Center,
                                                     fontSize = 15.sp
                                                 )
@@ -222,7 +206,7 @@ fun InformationScreen(navController: NavController) {
                                 .fillMaxWidth()
                                 .padding(10.dp),
                             colors = CardDefaults.cardColors(
-                                containerColor = Color(red = 179, green = 204, blue = 175)
+                                containerColor = MaterialTheme.colorScheme.surface
                             ),
                             innerComposable = {
                                 Column(
@@ -244,7 +228,7 @@ fun InformationScreen(navController: NavController) {
                                                 .padding(end = 10.dp),
                                             imageVector = Icons.Filled.School,
                                             contentDescription = "School Icon",
-                                            tint = Color(red = 13, green = 61, blue = 3)
+                                            tint = MaterialTheme.colorScheme.primary
                                         )
 
                                         EmboldenedTextTemplate(
@@ -257,7 +241,7 @@ fun InformationScreen(navController: NavController) {
                                         modifier = Modifier
                                             .padding(start = 20.dp, end = 20.dp, top = 15.dp, bottom = 10.dp),
                                         thickness = 5.dp,
-                                        color = Color(red = 13, green = 61, blue = 3)
+                                        color = MaterialTheme.colorScheme.primary
                                     )
 
                                     CourseBarLayout(
@@ -329,7 +313,7 @@ fun InformationScreen(navController: NavController) {
                                 .fillMaxWidth()
                                 .padding(10.dp),
                             colors = CardDefaults.cardColors(
-                                containerColor = Color(red = 179, green = 204, blue = 175)
+                                containerColor = MaterialTheme.colorScheme.surface
                             ),
                             innerComposable = {
                                 Column(
@@ -351,7 +335,7 @@ fun InformationScreen(navController: NavController) {
                                                 .padding(end = 10.dp),
                                             imageVector = Icons.Filled.CoPresent,
                                             contentDescription = "Office Icon",
-                                            tint = Color(red = 13, green = 61, blue = 3)
+                                            tint = MaterialTheme.colorScheme.primary
                                         )
 
                                         EmboldenedTextTemplate(
@@ -363,7 +347,7 @@ fun InformationScreen(navController: NavController) {
                                         modifier = Modifier
                                             .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
                                         thickness = 5.dp,
-                                        color = Color(red = 13, green = 61, blue = 3)
+                                        color = MaterialTheme.colorScheme.primary
                                     )
 
                                     OfficeBarLayout(
@@ -444,7 +428,7 @@ fun InformationScreen(navController: NavController) {
                                 .fillMaxWidth()
                                 .padding(10.dp),
                             colors = CardDefaults.cardColors(
-                                containerColor = Color(red = 179, green = 204, blue = 175)
+                                containerColor = MaterialTheme.colorScheme.surface
                             ),
                             innerComposable = {
                                 Column(
@@ -466,7 +450,7 @@ fun InformationScreen(navController: NavController) {
                                                 .padding(end = 10.dp),
                                             imageVector = Icons.Filled.BusinessCenter,
                                             contentDescription = "Management Icon",
-                                            tint = Color(red = 13, green = 61, blue = 3)
+                                            tint = MaterialTheme.colorScheme.primary
                                         )
 
                                         EmboldenedTextTemplate(
@@ -479,7 +463,7 @@ fun InformationScreen(navController: NavController) {
                                         modifier = Modifier
                                             .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 20.dp),
                                         thickness = 5.dp,
-                                        color = Color(red = 13, green = 61, blue = 3)
+                                        color = MaterialTheme.colorScheme.primary
                                     )
 
                                     EmboldenedTextTemplate(
@@ -492,7 +476,7 @@ fun InformationScreen(navController: NavController) {
                                         modifier = Modifier
                                             .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 20.dp),
                                         text = "OIC University President",
-                                        color = Color.Black,
+                                        color = MaterialTheme.colorScheme.onBackground,
                                         textAlign = TextAlign.Center,
                                         fontSize = 15.sp
                                     )
@@ -507,7 +491,7 @@ fun InformationScreen(navController: NavController) {
                                         modifier = Modifier
                                             .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 20.dp),
                                         text = "Vice President, Academics and Student Services University of Cabuyao",
-                                        color = Color.Black,
+                                        color = MaterialTheme.colorScheme.onBackground,
                                         textAlign = TextAlign.Center,
                                         fontSize = 15.sp
                                     )
@@ -522,7 +506,7 @@ fun InformationScreen(navController: NavController) {
                                         modifier = Modifier
                                             .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 20.dp),
                                         text = "Guidance Counselor",
-                                        color = Color.Black,
+                                        color = MaterialTheme.colorScheme.onBackground,
                                         textAlign = TextAlign.Center,
                                         fontSize = 15.sp
                                     )
@@ -535,7 +519,7 @@ fun InformationScreen(navController: NavController) {
                                 .fillMaxWidth()
                                 .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 20.dp),
                             colors = CardDefaults.cardColors(
-                                containerColor = Color(red = 179, green = 204, blue = 175)
+                                containerColor = MaterialTheme.colorScheme.surface
                             ),
                             innerComposable = {
                                 Column(
@@ -557,7 +541,7 @@ fun InformationScreen(navController: NavController) {
                                                 .padding(end = 10.dp),
                                             imageVector = Icons.Filled.Contacts,
                                             contentDescription = "Contacts Icon",
-                                            tint = Color(red = 13, green = 61, blue = 3)
+                                            tint = MaterialTheme.colorScheme.primary
                                         )
 
                                         EmboldenedTextTemplate(
@@ -570,7 +554,7 @@ fun InformationScreen(navController: NavController) {
                                         modifier = Modifier
                                             .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 20.dp),
                                         thickness = 5.dp,
-                                        color = Color(red = 13, green = 61, blue = 3)
+                                        color = MaterialTheme.colorScheme.primary
                                     )
 
                                     EmboldenedTextTemplate(
@@ -583,7 +567,7 @@ fun InformationScreen(navController: NavController) {
                                         modifier = Modifier
                                             .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 20.dp),
                                         text = "University Hotline",
-                                        color = Color.Black,
+                                        color = MaterialTheme.colorScheme.onBackground,
                                         textAlign = TextAlign.Center,
                                         fontSize = 15.sp
                                     )
@@ -600,7 +584,7 @@ fun InformationScreen(navController: NavController) {
                                         modifier = Modifier
                                             .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 20.dp),
                                         text = "University Address",
-                                        color = Color.Black,
+                                        color = MaterialTheme.colorScheme.onBackground,
                                         textAlign = TextAlign.Center,
                                         fontSize = 15.sp
                                     )

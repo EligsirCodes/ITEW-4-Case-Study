@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "323974195436",
+    "project_id": "pnc-buddy",
+    "storage_bucket": "pnc-buddy.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323974195436:android:d49225238b2f8cf24cddc9",
+        "android_client_info": {
+          "package_name": "com.example.itew4_casestudy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjLhbl3TzKEeqrEKW5ZRgtsMyDaKd3GIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
