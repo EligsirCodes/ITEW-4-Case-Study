@@ -18,4 +18,17 @@ class AnnouncementViewModel(
 
     private val currentUserId: String
         get() = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+
+    fun setFilter(filter: AnnouncementFilter) {
+        currentFilter = filter
+        applyFilter()
+    }
+
+    private fun applyFilter() {
+        announcements = when (currentFilter) {
+            AnnouncementFilter.ALL -> allAnnouncements
+            AnnouncementFilter.READ -> allAnnouncements.filter { it.readBy.contains(currentUserId) }
+            AnnouncementFilter.UNREAD -> allAnnouncements.filter { !it.readBy.contains(currentUserId) }
+        }
+    }
 }
