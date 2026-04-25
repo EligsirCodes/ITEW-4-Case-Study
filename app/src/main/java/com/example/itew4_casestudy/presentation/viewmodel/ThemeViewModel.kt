@@ -14,5 +14,5 @@ class ThemeViewModel(application: Application) : AndroidViewModel(application) {
     private val _isNotificationsEnabled = MutableStateFlow(sharedPrefs.getBoolean("notifications_enabled", true))
 
 
-    }
+
 }
