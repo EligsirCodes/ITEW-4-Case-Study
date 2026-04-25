@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.itew4_casestudy.data.repository.AnnouncementRepository
 import com.example.itew4_casestudy.domain.model.AnnouncementModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.Query
 
 enum class AnnouncementFilter { ALL, READ, UNREAD }
 class AnnouncementViewModel(
@@ -32,5 +33,18 @@ class AnnouncementViewModel(
             AnnouncementFilter.READ -> allAnnouncements.filter { it.readBy.contains(currentUserId) }
             AnnouncementFilter.UNREAD -> allAnnouncements.filter { !it.readBy.contains(currentUserId) }
         }
+    }
+
+    private fun listenToAnnouncements() {
+        repository.getCollectionReference()
+            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshot, error ->
+                if (snapshot != null) {
+                    allAnnouncements = snapshot.documents.mapNotNull {
+                        it.toObject(AnnouncementModel::class.java)
+                    }
+                    applyFilter()
+                }
+            }
     }
 }
