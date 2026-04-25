@@ -14,5 +14,10 @@ class ThemeViewModel(application: Application) : AndroidViewModel(application) {
     private val _isNotificationsEnabled = MutableStateFlow(sharedPrefs.getBoolean("notifications_enabled", true))
     val isNotificationsEnabled: StateFlow<Boolean> = _isNotificationsEnabled.asStateFlow()
 
+    fun toggleDarkMode(isEnabled: Boolean) {
+        _isDarkMode.value = isEnabled
+        sharedPrefs.edit().putBoolean("dark_mode", isEnabled).apply()
     }
+
+
 }
