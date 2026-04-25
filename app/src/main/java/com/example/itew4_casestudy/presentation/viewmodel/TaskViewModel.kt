@@ -9,6 +9,9 @@ import com.example.itew4_casestudy.data.repository.TaskRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
+import android.content.Context
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
 class TaskViewModel(
     private val repository: TaskRepository = TaskRepository()
@@ -52,5 +55,22 @@ class TaskViewModel(
                     tasks = fetchedTasks.toList()
                 }
             }
+    }
+
+    fun addTask(context: Context, title: String, dueDate: Long) {
+        val uid = currentUserId
+        if (uid.isNotEmpty()) {
+            viewModelScope.launch {
+                val docRef = repository.getCollectionReference().document()
+                val newTask = TaskModel(
+                    id = docRef.id,
+                    title = title,
+                    dueDateMillis = dueDate,
+                    userId = uid
+                )
+
+                docRef.set(newTask)
+            }
+        }
     }
 }
