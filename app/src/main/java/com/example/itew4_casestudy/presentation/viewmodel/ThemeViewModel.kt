@@ -8,5 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class ThemeViewModel(application: Application) : AndroidViewModel(application) {
+    private val sharedPrefs = application.getSharedPreferences("user_settings", Context.MODE_PRIVATE)
 
+    }
 }
