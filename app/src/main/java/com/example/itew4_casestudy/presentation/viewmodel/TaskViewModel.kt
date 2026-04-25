@@ -12,6 +12,7 @@ import com.google.firebase.firestore.Query
 import android.content.Context
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import com.example.itew4_casestudy.presentation.notifications.TaskScheduler
 
 class TaskViewModel(
     private val repository: TaskRepository = TaskRepository()
@@ -70,6 +71,8 @@ class TaskViewModel(
                 )
 
                 docRef.set(newTask)
+
+                TaskScheduler.scheduleNotification(context, newTask)
             }
         }
     }
