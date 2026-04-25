@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class ThemeViewModel(application: Application) : AndroidViewModel(application) {
     private val sharedPrefs = application.getSharedPreferences("user_settings", Context.MODE_PRIVATE)
+    private val _isDarkMode = MutableStateFlow(sharedPrefs.getBoolean("dark_mode", false))
 
-    }
+
+
 }
