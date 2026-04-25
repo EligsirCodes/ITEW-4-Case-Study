@@ -3,6 +3,7 @@ package com.example.itew4_casestudy.navigation
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -13,43 +14,36 @@ import com.example.itew4_casestudy.presentation.screens.LoginScreen
 import com.example.itew4_casestudy.presentation.screens.RegistrationScreen
 import com.example.itew4_casestudy.presentation.screens.SettingsScreen
 import com.example.itew4_casestudy.presentation.screens.TaskScreen
+import com.example.itew4_casestudy.presentation.viewmodel.AnnouncementViewModel
+import com.example.itew4_casestudy.presentation.viewmodel.AuthViewModel
+import com.example.itew4_casestudy.presentation.viewmodel.TaskViewModel
+import com.example.itew4_casestudy.presentation.viewmodel.ThemeViewModel
 
 @Composable
-fun AppNavHost(navController: NavHostController) {
+fun AppNavHost(navController: NavHostController, themeViewModel: ThemeViewModel) {
     val context = LocalContext.current
     val sharedPrefs = context.getSharedPreferences(
         "user_session",
         Context.MODE_PRIVATE
     )
-
     val isLoggedIn = sharedPrefs.getBoolean("is_logged_in", false)
-    val identifier = sharedPrefs.getString("identifier", "1") ?: "1"
 
     NavHost(
         navController = navController,
-        startDestination = if (isLoggedIn)
-            "dashboard_screen/$identifier"
-        else
-            Routes.LOGIN_SCREEN
+        startDestination = if (isLoggedIn) Routes.DASHBOARD_SCREEN else Routes.LOGIN_SCREEN
     ) {
         composable(Routes.LOGIN_SCREEN) {
-            LoginScreen(navController)
+            val authViewModel: AuthViewModel = viewModel()
+            LoginScreen(navController, authViewModel)
         }
 
         composable(Routes.REGISTRATION_SCREEN) {
-            RegistrationScreen(navController)
+            val authViewModel: AuthViewModel = viewModel()
+            RegistrationScreen(navController, authViewModel)
         }
 
-        composable(
-            route = Routes.DASHBOARD_SCREEN,
-            arguments = listOf(
-                androidx.navigation.navArgument("identifier") {
-                    type = androidx.navigation.NavType.StringType
-                }
-            )
-        ) { backStackEntry ->
-            val identifierD = backStackEntry.arguments?.getString("identifier") ?: "1"
-            DashboardScreen(navController, identifierD)
+        composable(route = Routes.DASHBOARD_SCREEN) {
+            DashboardScreen(navController)
         }
 
         composable(Routes.INFORMATION_SCREEN) {
@@ -57,15 +51,17 @@ fun AppNavHost(navController: NavHostController) {
         }
 
         composable(Routes.TASK_SCREEN) {
-            TaskScreen(navController)
+            val taskViewModel: TaskViewModel = viewModel()
+            TaskScreen(navController, taskViewModel)
         }
 
         composable(Routes.ANNOUNCEMENT_SCREEN) {
-            AnnouncementsScreen(navController)
+            val announcementViewModel: AnnouncementViewModel = viewModel()
+            AnnouncementsScreen(navController, announcementViewModel)
         }
 
         composable(Routes.SETTINGS_SCREEN) {
-            SettingsScreen(navController)
+            SettingsScreen(navController, themeViewModel)
         }
     }
 }
