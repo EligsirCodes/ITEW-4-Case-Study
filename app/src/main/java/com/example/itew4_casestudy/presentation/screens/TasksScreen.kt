@@ -3,7 +3,6 @@ package com.example.itew4_casestudy.presentation.screens
 import android.app.*
 import android.content.Context
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.*
 import androidx.compose.material.icons.*
 import androidx.compose.material.icons.filled.*
@@ -16,33 +15,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
 import androidx.navigation.NavController
-import com.example.itew4_casestudy.data.local.TaskEntity
+import com.example.itew4_casestudy.domain.model.TaskModel
 import com.example.itew4_casestudy.navigation.Routes
+import com.example.itew4_casestudy.presentation.viewmodel.TaskViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TaskScreen(navController: NavController) {
+fun TaskScreen(navController: NavController, viewModel: TaskViewModel) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val context = navController.context
 
-    val database =
-        remember { com.example.itew4_casestudy.data.local.AppDatabase.getDatabase(context) }
-    val repository =
-        remember { com.example.itew4_casestudy.data.repository.TaskRepository(database.taskDao()) }
-    val factory = remember {
-        com.example.itew4_casestudy.presentation.viewmodel.TaskViewModelFactory(repository)
-    }
-    val viewModel: com.example.itew4_casestudy.presentation.viewmodel.TaskViewModel =
-        androidx.lifecycle.viewmodel.compose.viewModel(factory = factory)
-
     var showDialog by remember { mutableStateOf(false) }
-    var taskToEdit by remember { mutableStateOf<TaskEntity?>(null) }
+    var taskToEdit by remember { mutableStateOf<TaskModel?>(null) }
     var taskTitle by remember { mutableStateOf("") }
     var selectedTimestamp by remember { mutableLongStateOf(System.currentTimeMillis()) }
 
@@ -77,20 +68,9 @@ fun TaskScreen(navController: NavController) {
                     navController.navigate(Routes.SETTINGS_SCREEN)
                 },
                 onLogoutClick = {
-                    val context = navController.context
-                    val sharedPrefs = context.getSharedPreferences(
-                        "user_session",
-                        Context.MODE_PRIVATE
-                    )
-
-                    sharedPrefs.edit()
-                        .putBoolean("is_logged_in", false)
-                        .apply()
-
-                    scope.launch {
-                        drawerState.close()
-                    }
-
+                    val sharedPrefs = context.getSharedPreferences("user_session", Context.MODE_PRIVATE)
+                    sharedPrefs.edit().putBoolean("is_logged_in", false).apply()
+                    scope.launch { drawerState.close() }
                     navController.navigate(Routes.LOGIN_SCREEN) {
                         popUpTo(0) { inclusive = true }
                         launchSingleTop = true
@@ -117,7 +97,7 @@ fun TaskScreen(navController: NavController) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding),
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Column(
@@ -138,7 +118,7 @@ fun TaskScreen(navController: NavController) {
                                 .size(40.dp),
                             imageVector = Icons.Filled.Task,
                             contentDescription = "Task Icon",
-                            tint = Color(red = 13, green = 61, blue = 3)
+                            tint = MaterialTheme.colorScheme.primary
                         )
 
                         EmboldenedTextTemplate(
@@ -152,7 +132,7 @@ fun TaskScreen(navController: NavController) {
                         modifier = Modifier
                             .padding(10.dp),
                         thickness = 3.dp,
-                        color = Color(red = 13, green = 61, blue = 3)
+                        color = MaterialTheme.colorScheme.primary
                     )
                 }
 
@@ -170,108 +150,126 @@ fun TaskScreen(navController: NavController) {
                     buttonText = "Add New Task"
                 )
 
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    verticalArrangement = Arrangement.Top,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    items(viewModel.tasks) { task ->
-                        CardTemplate(
-                            modifier = Modifier
-                                .padding(10.dp),
-                            colors = CardDefaults.cardColors(
-                                containerColor = Color(red = 179, green = 204, blue = 175)
-                            ),
-                            innerComposable = {
-                                Column(
-                                    modifier = Modifier
-                                        .fillMaxSize(),
-                                    verticalArrangement = Arrangement.Center,
-                                    horizontalAlignment = Alignment.Start
-                                ) {
-                                    EmboldenedTextTemplate(
-                                        modifier = Modifier.
-                                            padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 5.dp),
-                                        text = task.title,
-                                    )
-
-                                    NormalTextTemplate(
-                                        modifier = Modifier.
-                                            padding(start = 20.dp, end = 20.dp, bottom = 10.dp),
-                                        text = "Due: ${sdf.format(Date(task.dueDateMillis))}",
-                                        fontSize = 13.sp
-                                    )
-
-                                    HorizontalDivider(
+                if (viewModel.tasks.isEmpty()) {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        NormalTextTemplate(
+                            text = "No Tasks Posted",
+                            color = Color.Gray,
+                            fontSize = 18.sp,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                } else {
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        verticalArrangement = Arrangement.Top,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        items(
+                            items = viewModel.tasks,
+                            key = { task -> task.id }
+                        ) { task ->
+                            CardTemplate(
+                                modifier = Modifier
+                                    .padding(15.dp),
+                                colors = CardDefaults.cardColors(
+                                    containerColor = MaterialTheme.colorScheme.surface
+                                ),
+                                innerComposable = {
+                                    Column(
                                         modifier = Modifier
-                                            .padding(start = 20.dp, end = 20.dp),
-                                        thickness = 3.dp,
-                                        color = Color(red = 13, green = 61, blue = 3)
-                                    )
-
-                                    Row(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(start = 20.dp, end = 20.dp, bottom = 5.dp),
-                                        horizontalArrangement = Arrangement.Center,
-                                        verticalAlignment = Alignment.CenterVertically
+                                            .fillMaxSize(),
+                                        verticalArrangement = Arrangement.Center,
+                                        horizontalAlignment = Alignment.Start
                                     ) {
-                                        if (!task.isCompleted) {
+                                        EmboldenedTextTemplate(
+                                            modifier = Modifier.
+                                            padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 5.dp),
+                                            text = task.title,
+                                        )
+
+                                        NormalTextTemplate(
+                                            modifier = Modifier.
+                                            padding(start = 20.dp, end = 20.dp, bottom = 10.dp),
+                                            text = "Due: ${sdf.format(Date(task.dueDateMillis))}",
+                                            color = MaterialTheme.colorScheme.onBackground,
+                                            fontSize = 13.sp
+                                        )
+
+                                        HorizontalDivider(
+                                            modifier = Modifier
+                                                .padding(start = 20.dp, end = 20.dp),
+                                            thickness = 3.dp,
+                                            color = MaterialTheme.colorScheme.primary
+                                        )
+
+                                        Row(
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .padding(start = 20.dp, end = 20.dp, bottom = 5.dp),
+                                            horizontalArrangement = Arrangement.Center,
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ) {
+                                            if (!task.isCompleted) {
+                                                IconButton(
+                                                    modifier = Modifier
+                                                        .padding(start = 15.dp, end = 15.dp),
+                                                    onClick = {
+                                                        viewModel.markAsDone(context, task)
+                                                    }
+                                                ) {
+                                                    Icon(
+                                                        modifier = Modifier
+                                                            .size(30.dp),
+                                                        imageVector = Icons.Outlined.CheckCircle,
+                                                        contentDescription = "Done",
+                                                        tint = MaterialTheme.colorScheme.primary
+                                                    )
+                                                }
+
+                                                IconButton(
+                                                    modifier = Modifier
+                                                        .padding(start = 15.dp, end = 15.dp),
+                                                    onClick = {
+                                                        taskToEdit = task
+                                                        taskTitle = task.title
+                                                        selectedTimestamp = task.dueDateMillis
+                                                        showDialog = true
+                                                    }
+                                                ) {
+                                                    Icon(
+                                                        modifier = Modifier
+                                                            .size(30.dp),
+                                                        imageVector = Icons.Outlined.Edit,
+                                                        contentDescription = "Edit",
+                                                        tint = MaterialTheme.colorScheme.primary)
+                                                }
+                                            }
+
                                             IconButton(
                                                 modifier = Modifier
                                                     .padding(start = 15.dp, end = 15.dp),
                                                 onClick = {
-                                                    viewModel.markAsDone(task)
+                                                    viewModel.deleteTask(context, task)
                                                 }
                                             ) {
                                                 Icon(
                                                     modifier = Modifier
                                                         .size(30.dp),
-                                                    imageVector = Icons.Outlined.CheckCircle,
-                                                    contentDescription = "Done",
-                                                    tint = Color(red = 13, green = 61, blue = 3)
+                                                    imageVector = Icons.Outlined.Delete,
+                                                    contentDescription = "Delete",
+                                                    tint = Color.Red
                                                 )
                                             }
-
-                                            IconButton(
-                                                modifier = Modifier
-                                                    .padding(start = 15.dp, end = 15.dp),
-                                                onClick = {
-                                                    taskToEdit = task
-                                                    taskTitle = task.title
-                                                    selectedTimestamp = task.dueDateMillis
-                                                    showDialog = true
-                                                }
-                                            ) {
-                                                Icon(
-                                                    modifier = Modifier
-                                                        .size(30.dp),
-                                                    imageVector = Icons.Outlined.Edit,
-                                                    contentDescription = "Edit",
-                                                    tint = Color(red = 13, green = 61, blue = 3))
-                                            }
-                                        }
-
-                                        IconButton(
-                                            modifier = Modifier
-                                                .padding(start = 15.dp, end = 15.dp),
-                                            onClick = {
-                                                viewModel.deleteTask(task)
-                                            }
-                                        ) {
-                                            Icon(
-                                                modifier = Modifier
-                                                    .size(30.dp),
-                                                imageVector = Icons.Outlined.Delete,
-                                                contentDescription = "Delete",
-                                                tint = Color.Red
-                                            )
                                         }
                                     }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             }
@@ -307,8 +305,9 @@ fun TaskScreen(navController: NavController) {
 
                             NormalTextTemplate(
                                 modifier = Modifier.
-                                    padding(start = 20.dp, end = 20.dp, bottom = 10.dp),
+                                padding(start = 20.dp, end = 20.dp, bottom = 10.dp),
                                 text = "Selected: ${sdf.format(Date(selectedTimestamp))}",
+                                color = MaterialTheme.colorScheme.onBackground,
                                 fontSize = 12.sp
                             )
                         }
@@ -317,19 +316,21 @@ fun TaskScreen(navController: NavController) {
                         TextButton(
                             onClick = {
                                 if (taskToEdit == null) {
-                                    viewModel.addTask(taskTitle, selectedTimestamp)
+                                    viewModel.addTask(context, taskTitle, selectedTimestamp)
                                 } else {
                                     viewModel.updateTask(
-                                        taskToEdit!!.copy(
-                                            title = taskTitle,
-                                            dueDateMillis = selectedTimestamp
-                                        )
+                                        context,
+                                        taskToEdit!!.copy(title = taskTitle, dueDateMillis = selectedTimestamp)
                                     )
                                 }
                                 showDialog = false
                             }
                         ) {
-                            Text("Save", color = Color(13, 61, 3), fontWeight = FontWeight.Bold)
+                            Text(
+                                text = "Save",
+                                color = MaterialTheme.colorScheme.primary,
+                                fontWeight = FontWeight.Bold
+                            )
                         }
                     },
                     dismissButton = {

@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.itew4_casestudy" />
+                  <option name="mobileSdkAppId" value="1:323974195436:android:d49225238b2f8cf24cddc9" />
+                  <option name="projectId" value="pnc-buddy" />
+                  <option name="projectNumber" value="323974195436" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
