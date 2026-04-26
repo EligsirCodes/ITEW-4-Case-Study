@@ -1,6 +1,7 @@
 package com.example.itew4_casestudy.presentation.screens
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -8,35 +9,58 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.*
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.itew4_casestudy.R
 import com.example.itew4_casestudy.navigation.Routes
+import com.example.itew4_casestudy.presentation.viewmodel.AuthViewModel
+import com.example.itew4_casestudy.presentation.viewmodel.LoginState
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen(navController: NavController, viewModel: AuthViewModel) {
     val context = LocalContext.current
-    val sharedPrefs = context.getSharedPreferences(
-        "user_session",
-        Context.MODE_PRIVATE
-    )
+    val sharedPrefs = context.getSharedPreferences("user_session", Context.MODE_PRIVATE)
 
     val scrollState = rememberScrollState()
-    var userName by rememberSaveable { mutableStateOf("") }
+    var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
+
+    val loginState by viewModel.loginState.collectAsState()
+
+    LaunchedEffect(loginState) {
+        when (loginState) {
+            is LoginState.Success -> {
+                sharedPrefs.edit()
+                    .putBoolean("is_logged_in", true)
+                    .apply()
+
+                navController.navigate(Routes.DASHBOARD_SCREEN) {
+                    popUpTo(Routes.LOGIN_SCREEN) { inclusive = true }
+                }
+                viewModel.resetLoginState()
+            }
+            is LoginState.Error -> {
+                Toast.makeText(context, (loginState as LoginState.Error).message, Toast.LENGTH_SHORT).show()
+                viewModel.resetLoginState()
+            }
+            else -> {}
+        }
+    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(scrollState),
+            .verticalScroll(scrollState)
+            .background(MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -57,7 +81,7 @@ fun LoginScreen(navController: NavController) {
                     )
                     .border(
                         width = 5.dp,
-                        color = Color(red = 13, green = 61, blue = 3),
+                        color = MaterialTheme.colorScheme.primary,
                         shape = CircleShape
                     )
                     .clip(CircleShape),
@@ -74,7 +98,7 @@ fun LoginScreen(navController: NavController) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color(red = 179, green = 204, blue = 175)),
+                    .background(MaterialTheme.colorScheme.surface),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -93,14 +117,14 @@ fun LoginScreen(navController: NavController) {
         }
 
         TextFieldLayout(
-            layoutLabel = "Username",
+            layoutLabel = "Email",
             innerComposable = {
                 TextFieldTemplate(
-                    value = userName,
+                    value = email,
                     valueUpdate = {
-                        userName = it
+                        email = it
                     },
-                    textFieldLabel = "Username",
+                    textFieldLabel = "Email",
                     icon = Icons.Filled.Person
                 )
             }
@@ -125,31 +149,9 @@ fun LoginScreen(navController: NavController) {
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
             onClick = {
-                if (userName == "q" && password == "q") {
-                    sharedPrefs.edit()
-                        .putBoolean("is_logged_in", true)
-                        .putString("identifier", "1")
-                        .apply()
-
-                    navController.navigate("dashboard_screen/1") {
-                        popUpTo(Routes.LOGIN_SCREEN) {
-                            inclusive = true
-                        }
-                    }
-                } else if (userName == "admin" && password == "admin") {
-                    sharedPrefs.edit()
-                        .putBoolean("is_logged_in", true)
-                        .putString("identifier", "2")
-                        .apply()
-
-                    navController.navigate("dashboard_screen/2") {
-                        popUpTo(Routes.LOGIN_SCREEN) {
-                            inclusive = true
-                        }
-                    }
-                }
+                viewModel.login(email.trim(), password.trim())
             },
-            buttonText = "Log In"
+            buttonText = if (loginState is LoginState.Loading) "Logging in..." else "Log In"
         )
 
         LogInOrSignUpLayout(
