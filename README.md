@@ -15,11 +15,44 @@ The application focuses on the following key functionalities:
 
 ## Development Phases
 
-The Smart Campus Companion will be developed over **three periods**, with each phase introducing new features and improvements:
+The Smart Campus Companion is developed over **three periods**, with each phase introducing new features and improvements:
 
-* Progressive addition of functionalities
-* Continuous enhancement of code quality
-* Refinement of user experience and interface design
+* **Phase 1:** Initial UI and Navigation (Prelims)
+* **Phase 2:** Feature Expansion & MVVM (Midterms)
+* **Phase 3:** Advanced Features & App Polish (Finals)
+
+---
+
+## 🏗️ Phase 1: Initial UI & Navigation (Prelim)
+
+### Goal
+Establish the core foundation of the Smart Campus Companion, focusing on the user interface, navigation structure, and primary static screens.
+
+---
+
+### ✅ Functional Requirements
+
+#### 1. User Interface (UI) Foundation
+- Implementation of **Login** and **Registration** screens.
+- Design of the **Dashboard** as the central hub for users.
+- Development of the **Campus Information** module to display university details.
+
+#### 2. Navigation System
+- Integration of **Jetpack Compose Navigation**.
+- Implementation of a **Bottom Navigation Bar** for seamless transitions between Dashboard, Tasks, Announcements, and Settings.
+- Defined **NavGraph** and **Routes** for app-wide navigation.
+
+#### 3. Reusable Components
+- Creation of standardized UI components (Buttons, TextFields, Cards) to ensure visual consistency.
+
+---
+
+### 🏗️ Technical Focus
+
+- **Kotlin & Jetpack Compose** – Building modern, declarative UIs.
+- **Material Design 3** – Adhering to contemporary Android design guidelines.
+- **Scaffold & Layouts** – Managing screen structures with TopBars and BottomBars.
+- **State Management** – Basic usage of `remember` and `mutableStateOf` for UI interactivity.
 
 ---
 
@@ -136,15 +169,90 @@ The team also documented a case in `AnnouncementDao` where methods were removed 
 
 ---
 
+## 🚀 Phase 3: Advanced Features & App Polish (Finals)
+
+### Goal
+Prepare the app for near-production quality and demonstrate mastery of collaboration.
+
+---
+
+### ✅ Functional Requirements
+
+#### 1. User Roles (Mock)
+- **Student role**: Standard access to tasks and announcements.
+- **Admin role**: Specialized access to post and manage announcements.
+
+#### 2. Backend Data Integration
+- Integration with **Firebase** (Firestore for database, Authentication, and Cloud Messaging).
+
+#### 3. Settings Module
+- **Dark mode** support for personalized UI.
+- **Notification toggle** to manage app alerts.
+
+#### 4. UI/UX Improvements
+- Implementation of **Empty states** for better user guidance.
+- Clear **Error messages** and **Loading indicators** for smooth state transitions.
+
+---
+
+### 🏗️ Technical Focus
+
+- **Clean Architecture** concepts for scalability and maintainability.
+- **Optional Modularization** of project features.
+- **Dependency Injection** (optional) for decoupled components.
+- **Notifications** and Push Alerts.
+
+---
+
+### 📄 Documentation
+
+- **Architecture Documentation**: Detailed overview of the project structure.
+- **Git Workflow**: Re-evaluation and refinement of team collaboration.
+- **Contribution Report**: Summary of individual tasks and project progress.
+
+---
+
+## 🛠️ Setup Instructions
+
+To get the Smart Campus Companion up and running on your local machine, follow these steps:
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/your-username/itew4-case-study.git
+   ```
+2. **Open in Android Studio**
+    - Launch Android Studio.
+    - Select **Open** and navigate to the project folder.
+3. **Firebase Setup**
+    - Create a new project on the [Firebase Console](https://console.firebase.google.com/).
+    - Add an Android App with the package name `com.example.itew4_casestudy`.
+    - Download the `google-services.json` file and place it in the `app/` directory.
+4. **Build & Run**
+    - Sync the project with Gradle files.
+    - Click the **Run** button or press `Shift + F10` to deploy to an emulator or physical device.
+
+---
+
+## 🏷️ Version Tagging
+
+This project follows a structured versioning system to mark significant milestones:
+
+- **`v1.0-midterm`** – Marks the completion of Phase 2 (MVVM + Room Database).
+- **`v2.0-final`** – Marks the final production-ready version with all Phase 3 features.
+
+All tags point to stable, tested commits on the `master` branch.
+
+---
+
 ## Team Roles
 
-The project is developed collaboratively with the following team members:
+The project is developed collaboratively with the following team members (As of Finals Period):
 
-* **Team Leader:** Luiz Gabriel Rosales
-* **Junior UI/UX Design | Documentation & Testing:** Joaquin Aaron Recio
-* **Senior UI/UX Design:** John Lester Penafiel
-* **Feature Developer:** Trisha Ann Rabano
-* **Git Manager:** Marc Alvin Quitorio
+* **Team Leader:** Luiz Gabriel Rosales (Project Integration & General Tasks)
+* **Junior UI/UX Design | Documentation & Testing:** Joaquin Aaron Recio (`TaskViewModel`)
+* **Senior UI/UX Design:** John Lester Penafiel (`AnnouncementViewModel`)
+* **Feature Developer:** Trisha Ann Rabano (`ThemeViewModel`)
+* **Git Manager:** Marc Alvin Quitorio (`AuthViewModel`)
 
 ---
 
