@@ -12,6 +12,7 @@ import com.google.firebase.firestore.Query
 import kotlinx.coroutines.launch
 
 enum class AnnouncementFilter { ALL, READ, UNREAD }
+
 class AnnouncementViewModel(
     private val repository: AnnouncementRepository = AnnouncementRepository()
 ) : ViewModel() {
